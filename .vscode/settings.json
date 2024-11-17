@@ -1,0 +1,16 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.base.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.controls.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.fxml.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.graphics.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.media.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.swing.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx.web.jar",
+        "/home/samlima/JavaFX/javafx-sdk-23.0.1/lib/javafx-swt.jar",
+        "/home/samlima/Downloads/mysql-connector-j_9.1.0-1ubuntu24.04_all/usr/share/java/mysql-connector-java-9.1.0.jar"
+    ]
+}
