@@ -23,7 +23,6 @@ public class App extends Application{
             mainStage.setTitle("Super Duper Mart");
             mainStage.setScene(tela);
             mainStage.show();
-    
         }
     
         public static void changeScene(String fxml) throws Exception{

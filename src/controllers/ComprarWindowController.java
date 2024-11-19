@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Fornecedores;
 import model.Produtos;
+import utils.ErrorMessage;
 import utils.SuccessMessage;
 import view.App;
 
@@ -19,6 +20,9 @@ public class ComprarWindowController {
     FornecedoresDAO fdao = new FornecedoresDAO();
     ProdutosDAO pdao = new ProdutosDAO();
     ComprasDAO cdao = new ComprasDAO();
+
+    @FXML
+    private Button buttonCancelar;
 
     @FXML
     private Button buttonConfirmar;
@@ -41,12 +45,21 @@ public class ComprarWindowController {
     @FXML
     void comprar(ActionEvent event) throws Exception {
 
+        if(nomeFornecedorField.getText().isEmpty() || contatoFornecedorField.getText().isEmpty() || nomeProduto.getText().isEmpty() || precoProduto.getText().isEmpty() || quantidadeProduto.getText().isEmpty()){
+            System.out.println("Erro na compra");
+            ErrorMessage.showErrorMessage(
+                "Erro!",
+                "Preencha os campos corretamente"
+            );
+            return;
+        }
+
         Double precoProdutoDouble = Double.parseDouble(precoProduto.getText());
         Double precoDeVenda = precoProdutoDouble*0.3 + precoProdutoDouble;
 
         Fornecedores f = new Fornecedores(nomeFornecedorField.getText(), contatoFornecedorField.getText());
-        Produtos p = new Produtos(nomeProduto.getText(), precoProdutoDouble,
-         precoDeVenda, Integer.parseInt(quantidadeProduto.getText()));
+        Produtos p = new Produtos(nomeProduto.getText(), precoProduto.getText(),
+         precoDeVenda.toString(), Integer.parseInt(quantidadeProduto.getText()));
         if(!fdao.fornecedorExiste(f)) fdao.addFornecedor(f);
 
         if(!pdao.ProdutoExiste(p)){
@@ -61,6 +74,11 @@ public class ComprarWindowController {
 
         App.changeScene("../view/MenuWindow.fxml");
 
+    }
+
+    @FXML
+    void cancelar(ActionEvent event) throws Exception {
+        App.changeScene("../view/MenuWindow.fxml");
     }
 
 }

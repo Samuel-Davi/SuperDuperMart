@@ -57,8 +57,8 @@ public class MenuWindowController {
     }
 
     @FXML
-    void vender(ActionEvent event) {
-
+    void vender(ActionEvent event) throws Exception {
+        App.changeScene("../view/VendaWindow.fxml");
     }
 
     @FXML

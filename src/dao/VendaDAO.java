@@ -1,13 +1,15 @@
 package dao;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import config.DatabaseConnection;
+import javafx.scene.control.ComboBox;
 import model.Fornecedores;
 import model.Produtos;
 
-public class ComprasDAO extends DatabaseConnection{
+public class VendaDAO extends DatabaseConnection{
 
     public boolean addCompras(Produtos p, Fornecedores f, Integer quantidade){
         try {
@@ -18,6 +20,16 @@ public class ComprasDAO extends DatabaseConnection{
 			return true;
 		}catch(SQLException e) {System.out.println("erro ao add compra: " + e.getMessage()); return false;}
         
+    }
+
+    public void getNomesProdutos(ComboBox<String> comboBox){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select nome from produtos");
+            while(rs.next()){
+                comboBox.getItems().add(rs.getString("nome"));
+            }
+        }catch(SQLException e){System.out.println("erro ao carregar produtos: " + e.getMessage());}
     }
 
     /*public Produtos getProdutoPorNome(String nome){

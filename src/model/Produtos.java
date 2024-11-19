@@ -1,15 +1,17 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class Produtos {
     private String nome_produto;
-    private double preco_compra, preco_venda;
+    private BigDecimal preco_compra, preco_venda;
     private int estoque_atual;
 
-    public Produtos(String nome_produto, double preco_compra,
-     double preco_venda, int estoque_atual) {
+    public Produtos(String nome_produto, String preco_compra,
+     String preco_venda, int estoque_atual) {
         this.nome_produto = nome_produto;
-        this.preco_compra = preco_compra;
-        this.preco_venda = preco_venda;
+        this.preco_compra = new BigDecimal(preco_compra);
+        this.preco_venda = new BigDecimal(preco_venda);
         this.estoque_atual = estoque_atual;
     }
 
@@ -21,19 +23,19 @@ public class Produtos {
     public void setNome_produto(String nome_produto) {
         this.nome_produto = nome_produto;
     }
-    public double getPreco_compra() {
+    public BigDecimal getPreco_compra() {
         return preco_compra;
     }
 
-    public void setPreco_compra(double preco_compra) {
+    public void setPreco_compra(BigDecimal preco_compra) {
         this.preco_compra = preco_compra;
     }
 
-    public double getPreco_venda() {
+    public BigDecimal getPreco_venda() {
         return preco_venda;
     }
 
-    public void setPreco_venda(double preco_venda) {
+    public void setPreco_venda(BigDecimal preco_venda) {
         this.preco_venda = preco_venda;
     }
 

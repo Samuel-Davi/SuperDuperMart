@@ -55,7 +55,7 @@ public class ProdutosDAO extends DatabaseConnection{
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("select * from produtos");
 			while (rs.next()) {
-                Produtos f = new Produtos(rs.getString(1), rs.getDouble(2), rs.getDouble(3),
+                Produtos f = new Produtos(rs.getString(1), rs.getBigDecimal(2).toString(), rs.getBigDecimal(3).toString(),
                 rs.getInt(4));
                 listaDeProdutos.add(f);
 			}

@@ -79,7 +79,7 @@
                   <Font size="17.0" />
                </font>
             </Text>
-            <FlowPane alignment="CENTER" layoutX="68.0" layoutY="254.0" orientation="VERTICAL" prefHeight="120.0" prefWidth="505.0">
+            <FlowPane alignment="CENTER" layoutX="68.0" layoutY="254.0" orientation="VERTICAL" prefHeight="120.0" prefWidth="400.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="10.0">
                      <children>
@@ -112,7 +112,8 @@
                   </VBox>
                </children>
             </FlowPane>
-            <Button fx:id="buttonConfirmar" layoutX="533.0" layoutY="301.0" mnemonicParsing="false" onAction="#comprar" text="Confirmar" />
+            <Button fx:id="buttonConfirmar" layoutX="533.0" layoutY="301.0" mnemonicParsing="false" onAction="#comprar" text="Confirmar" AnchorPane.rightAnchor="26.0" />
+            <Button fx:id="buttonCancelar" layoutX="35.0" layoutY="301.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" AnchorPane.leftAnchor="26.0" />
          </children>
     </AnchorPane>
   </children>
