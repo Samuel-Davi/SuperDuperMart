@@ -2,26 +2,34 @@ package model;
 
 import java.math.BigDecimal;
 
+import dao.ProdutosDAO;
+
 public class Compras {
 
-    private String nomeFornecedor, nomeProduto;
+    private String nomeProduto;
     private BigDecimal precoUnitario;
-    private Integer quantidade;
+    private Integer id, quantidade;
 
-    public Compras(String nomeFornecedor, String nomeProduto, BigDecimal precoUnitario, Integer quantidade) {
-        this.nomeFornecedor = nomeFornecedor;
+    public Compras(Integer id, String nomeProduto, BigDecimal precoUnitario, Integer quantidade) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
     }
 
-    // Getters and Setters
-    public String getNomeFornecedor() {
-        return nomeFornecedor;
+    public String getDescricao(){
+        Produtos p = new ProdutosDAO().getProdutoPorNome(nomeProduto);
+        return p.getDescricao();
     }
 
-    public void setNomeFornecedor(String nomeFornecedor) {
-        this.nomeFornecedor = nomeFornecedor;
+    // Getters and Setters
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNomeProduto() {

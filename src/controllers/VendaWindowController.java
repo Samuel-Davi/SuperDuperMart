@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import model.Vendas;
 import utils.ConfirmationMessage;
 import utils.ErrorMessage;
 import utils.SuccessMessage;
@@ -76,10 +77,15 @@ public class VendaWindowController {
             return;
         }
 
-        boolean resultVenda = vdao.addVenda(Integer.parseInt(quantidadeVenda.getText()),
-        Double.parseDouble(valorUnitarioVenda.getText()), Double.parseDouble(valorTotalVenda.getText()),
-        Double.parseDouble(valorPagoVenda.getText()), Double.parseDouble(trocoVenda.getText()),
-        boxProdutos.getValue(), formaPagamento.getValue());
+        Vendas venda = new Vendas(0,
+        new BigDecimal(valorPagoVenda.getText()), 
+        formaPagamento.getValue(),
+        new BigDecimal(trocoVenda.getText()), 
+        (boxProdutos.getValue()),
+        new BigDecimal(valorUnitarioVenda.getText()), 
+        Integer.parseInt(quantidadeVenda.getText()));
+
+        boolean resultVenda = vdao.addVenda(venda);
 
         if(!resultVenda){
             ErrorMessage.showErrorMessage("Erro!", "Falha ao realizar a venda.");

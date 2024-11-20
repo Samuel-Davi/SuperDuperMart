@@ -1,25 +1,27 @@
 package controllers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
-import dao.ComprasDAO;
 import dao.ProdutosDAO;
+import dao.VendaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Compras;
+import model.Produtos;
+import model.Vendas;
 import utils.ConfirmationMessage;
 import utils.ErrorMessage;
 import utils.SuccessMessage;
 import view.App;
 
-public class AlterarComprasController {
+public class AlterarVendaController {
 
-    ComprasDAO cdao = new ComprasDAO();
+    VendaDAO vdao = new VendaDAO();
     ProdutosDAO pdao = new ProdutosDAO();
 
     @FXML
@@ -29,22 +31,19 @@ public class AlterarComprasController {
     private Button buttonConfirmar;
 
     @FXML
-    private TextArea descricaoProduto;
-
-    @FXML
-    private ChoiceBox<String> comboBoxFornecedor;
-
-    @FXML
     private ComboBox<String> comboBoxId;
 
     @FXML
     private ChoiceBox<String> comboBoxProduto;
 
     @FXML
-    private TextField precoField;
+    private ComboBox<String> formaPagamento;
 
     @FXML
     private TextField quantidadeField;
+
+    @FXML
+    private TextField valorPago;
 
     @FXML
     void cancelar(ActionEvent event) throws Exception {
@@ -59,27 +58,32 @@ public class AlterarComprasController {
 
     @FXML
     void confirmarAlteracao(ActionEvent event) throws Exception {
-        Compras compra = new Compras(
-            Integer.parseInt(comboBoxId.getValue()),
-            comboBoxProduto.getValue(),
-            new BigDecimal(precoField.getText()),
-            Integer.valueOf(quantidadeField.getText()));
-        cdao.alterarCompra(compra);
+        Produtos produto = pdao.getProdutoPorNome(comboBoxProduto.getValue());
+
+        Vendas venda = new Vendas(
+            Integer.parseInt(comboBoxId.getValue()), 
+            new BigDecimal(valorPago.getText()), 
+            formaPagamento.getValue(), 
+            new BigDecimal(Integer.parseInt(quantidadeField.getText())*Double.valueOf(produto.getPreco_venda().toString())), 
+            comboBoxProduto.getValue(), 
+            produto.getPreco_venda(), 
+            Integer.parseInt(quantidadeField.getText()));
+        vdao.alterarVenda(venda);
         SuccessMessage.showSucessMessage(
             "Sucesso!",
-            "Alteração feita com sucesso!\nObs: alteração na compra não afeta o estoque do produto!!!");
+            "Alteração feita com sucesso!\nObs: alteração na venda não afeta o estoque do produto!!!");
         App.changeScene("../view/MenuWindow.fxml");
     }
 
     @FXML
     void initialize() throws Exception {
-        if(cdao.getIds()==null){
-            ErrorMessage.showErrorMessage(
-                "Erro!",
-                "Não há vendas para alterar");
-            App.changeScene("../view/MenuWindow.fxml");
-        }
-        comboBoxId.getItems().addAll(cdao.getIds());
+        ArrayList<String> formasdepagamento = new ArrayList<String>();
+        formasdepagamento.add("Dinheiro");
+        formasdepagamento.add("Pix");
+        formasdepagamento.add("Débito");
+        formasdepagamento.add("Crédito");
+        comboBoxId.getItems().addAll(vdao.getIds());
+        formaPagamento.getItems().addAll(formasdepagamento);
         comboBoxProduto.getItems().addAll(pdao.getNomeProdutos());
         comboBoxId.valueProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue!= null &&!newValue.equals(oldValue)){
@@ -91,11 +95,11 @@ public class AlterarComprasController {
     void mudaInformacoes(String newValue){
         if(newValue == null) return;
 
-        Compras c = cdao.getCompraPorIds(newValue);
-        comboBoxProduto.setValue(c.getNomeProduto());
-        descricaoProduto.setText(pdao.getProdutoPorNome(c.getNomeProduto()).getDescricao());
-        precoField.setText(String.valueOf(c.getPrecoUnitario()));
-        quantidadeField.setText(String.valueOf(c.getQuantidade()));
+        Vendas v = vdao.getVendasPorIds(newValue);
+        formaPagamento.setValue(v.getFormaPagamento());
+        comboBoxProduto.setValue(v.getNomeProduto());
+        valorPago.setText(String.valueOf(v.getValorPago()));
+        quantidadeField.setText(String.valueOf(v.getQuantidade()));
         // TODO: preencher os campos com os dados da compra com id newValue
     }
 

@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Produtos;
 import utils.ConfirmationMessage;
@@ -25,6 +26,9 @@ public class AlterarProdutosController {
     private Button buttonConfirmar;
 
     @FXML
+    private TextArea descProduto;
+
+    @FXML
     private ComboBox<String> comboBoxProdutos;
 
     @FXML
@@ -38,7 +42,7 @@ public class AlterarProdutosController {
 
 
     @FXML
-    void initialize(){
+    void initialize() throws Exception{
         ArrayList<String> nomeProdutos = pdao.getNomeProdutos();
         comboBoxProdutos.getItems().addAll(nomeProdutos);
         comboBoxProdutos.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -51,6 +55,7 @@ public class AlterarProdutosController {
     void mudaInformacoes(String newValue){
         Produtos p = pdao.getProdutoPorNome(newValue);
         precoCompra.setText(String.valueOf(p.getPreco_compra()));
+        descProduto.setText(p.getDescricao());
         precoVenda.setText(String.valueOf(p.getPreco_venda()));
         estoqueAtual.setText(String.valueOf(p.getEstoque_atual()));
     }
@@ -85,7 +90,9 @@ public class AlterarProdutosController {
 
         if(result) {
             pdao.alterarProduto(comboBoxProdutos.getValue(),
-            Double.parseDouble(precoCompra.getText()), Double.parseDouble(precoVenda.getText()),
+            descProduto.getText(),
+            Double.parseDouble(precoCompra.getText()), 
+            Double.parseDouble(precoVenda.getText()),
             Integer.parseInt(estoqueAtual.getText()));
             SuccessMessage.showSucessMessage(
                 "Sucesso!",

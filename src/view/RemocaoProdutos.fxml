@@ -34,34 +34,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlterarProdutosController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RemocaoProdutosController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="186.0" layoutY="85.0" text="Produto:" />
-            <ComboBox fx:id="comboBoxProdutos" layoutX="313.0" layoutY="81.0" prefWidth="150.0" />
-            <TextField fx:id="precoCompra" layoutX="307.0" layoutY="209.0" />
-            <TextField fx:id="precoVenda" layoutX="307.0" layoutY="250.0" />
-            <TextField fx:id="estoqueAtual" layoutX="307.0" layoutY="290.0" />
-            <Text layoutX="278.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Produto">
-               <font>
-                  <Font size="19.0" />
-               </font></Text>
-            <Label layoutX="158.0" layoutY="213.0" text="Preço de Compra:" />
-            <Label layoutX="164.0" layoutY="245.0" text="Preço de Venda:" />
-            <Label layoutX="194.0" layoutY="294.0" text="Estoque:" />
-            <Button fx:id="buttonConfirmar" layoutX="307.0" layoutY="336.0" mnemonicParsing="false" onAction="#confirmaAlteracao" text="Confirmar" />
-            <Button fx:id="buttonCancelar" layoutX="31.0" layoutY="336.0" mnemonicParsing="false" onAction="#cancelarAlteracao" text="Cancelar" />
-            <TextArea fx:id="descProduto" layoutX="288.0" layoutY="128.0" prefHeight="72.0" prefWidth="200.0" />
-            <Label layoutX="184.0" layoutY="155.0" text="Descricao" />
+            <Text layoutX="253.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remoçao de produtos" />
+            <ComboBox fx:id="comboBox" layoutX="246.0" layoutY="180.0" prefWidth="150.0" />
+            <Button fx:id="buttonConfirma" layoutX="280.0" layoutY="275.0" mnemonicParsing="false" onAction="#confirma" text="Confirmar" />
+            <Button fx:id="buttonCancela" layoutX="56.0" layoutY="275.0" mnemonicParsing="false" onAction="#cancela" text="Cancelar" />
+            <Text layoutX="289.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione:" />
          </children>
     </AnchorPane>
   </children>

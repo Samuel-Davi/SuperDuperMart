@@ -3,15 +3,16 @@ package model;
 import java.math.BigDecimal;
 
 public class Produtos {
-    private String nome_produto;
+    private String nome_produto, descricao;
     private BigDecimal preco_compra, preco_venda;
     private int estoque_atual;
 
-    public Produtos(String nome_produto, String preco_compra,
-     String preco_venda, int estoque_atual) {
+    public Produtos(String nome_produto,String descricao ,BigDecimal preco_compra,
+     BigDecimal preco_venda, int estoque_atual) {
         this.nome_produto = nome_produto;
-        this.preco_compra = new BigDecimal(preco_compra);
-        this.preco_venda = new BigDecimal(preco_venda);
+        this.descricao = descricao;
+        this.preco_compra = (preco_compra);
+        this.preco_venda = (preco_venda);
         this.estoque_atual = estoque_atual;
     }
 
@@ -22,6 +23,14 @@ public class Produtos {
 
     public void setNome_produto(String nome_produto) {
         this.nome_produto = nome_produto;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     public BigDecimal getPreco_compra() {
         return preco_compra;

@@ -4,38 +4,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import config.DatabaseConnection;
 import javafx.scene.control.ComboBox;
-import model.Fornecedores;
+import model.Compras;
 import model.Produtos;
+import model.Vendas;
 
 public class VendaDAO extends DatabaseConnection{
 
-    public boolean addVenda(Integer quantidade, Double valorUnitario, Double valorTotal, Double valorPago,
-    Double troco , String nomeProduto, String formaPagamento){
+    public boolean addVenda(Vendas v){
 
-        String queryVenda = "insert into vendas values (null, default, " + new BigDecimal(valorTotal) + "," +
-        new BigDecimal(valorPago) + "," + new BigDecimal(troco) + "," + "\"" + formaPagamento + "\"" + ")";
+        String queryVenda = "insert into vendas (id, data_venda, valor_total, nome_produto, valor_pago," +
+        "troco, quantidade,forma_pagamento) values (?, default, ?, ?, ?, ?, ?, ?)";
 
         try {
-			Statement st = conexao.createStatement();
-            st.executeUpdate(queryVenda);
-            Statement st2 = conexao.createStatement();
-			ResultSet rs = st2.executeQuery("select last_insert_id()");
-            if (rs.next()) {
-                int lastId = rs.getInt(1);
-                String queryItemVenda = "INSERT INTO item_venda (id, id_venda, nome_produto, quantidade, preco_unitario, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
-                PreparedStatement ps = conexao.prepareStatement(queryItemVenda);
-                ps.setNull(1, java.sql.Types.INTEGER);
-                ps.setInt(2, lastId);
-                ps.setString(3, nomeProduto);
-                ps.setInt(4, quantidade);
-                ps.setBigDecimal(5, new BigDecimal(valorUnitario));
-                ps.setBigDecimal(6, new BigDecimal(valorTotal));
-                ps.executeUpdate();
-            }
-            alterarProduto(nomeProduto, getEstoqueProduto(nomeProduto) - quantidade);
+            PreparedStatement ps = conexao.prepareStatement(queryVenda);
+            ps.setNull(1, java.sql.Types.INTEGER);
+            ps.setBigDecimal(2, v.getValorTotal());
+            ps.setString(3, v.getNomeProduto());
+            ps.setBigDecimal(4, v.getValorPago());
+            ps.setBigDecimal(5, v.getTroco());
+            ps.setInt(6, v.getQuantidade());
+            ps.setString(7, v.getFormaPagamento());
+            ps.executeUpdate();
+            alterarProduto(v.getNomeProduto(), getEstoqueProduto(v.getNomeProduto()) - v.getQuantidade());
             return true;
 		}catch(SQLException e) {System.out.println("erro ao add venda ou item_venda: " + e.getMessage()); return false;}
         
@@ -87,6 +82,71 @@ public class VendaDAO extends DatabaseConnection{
         }catch(SQLException e){
             System.out.println("Erro ao carregar estoque: " + e.getMessage());
             return 0;
+        }
+    }
+
+    public void alterarVenda(Vendas venda){
+        try{
+            Statement st2 = conexao.createStatement();
+            st2.executeUpdate("update vendas set forma_pagamento = " + "\"" + venda.getFormaPagamento() +
+            "\"" + ",troco = " + venda.getTroco() + ", valor_pago = " + venda.getValorPago() + ",nome_produto = " 
+            + "\"" +  venda.getNomeProduto() + "\"" +", data_venda = default, valor_total = " +
+            venda.getValorTotal() +" where id = " + venda.getId());
+        }catch(SQLException e){
+            System.out.println("erro no alterar venda: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<String> getIds(){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select id from vendas");
+            ArrayList<String> ids = new ArrayList<>();
+            while(rs.next()){
+                Integer id = rs.getInt(1);
+                ids.add(id.toString());
+            }
+            return ids;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar ids: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Vendas getVendasPorIds(String idParam) {
+        Integer id = Integer.parseInt(idParam);
+
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select * from vendas where id = " + id);
+            if(rs.next()){
+                String nomeProduto = rs.getString("nome_produto");
+                ProdutosDAO pdao = new ProdutosDAO();
+                Produtos p = pdao.getProdutoPorNome(nomeProduto);
+                Vendas venda = new Vendas(rs.getInt("id"), rs.getBigDecimal("valor_pago"),
+                rs.getString("forma_pagamento"), rs.getBigDecimal("troco"), rs.getString("nome_produto"),
+                new BigDecimal(p.getPreco_venda().toString()), rs.getInt("quantidade"));
+                return venda;
+            }
+            return null;
+        }catch (SQLException e) {
+            System.out.println("Erro ao pegar ids: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Timestamp getDataPorId(Integer id){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select data_venda from vendas where id = " + id);
+            if(rs.next()){
+                Timestamp data = rs.getTimestamp("data_venda");
+                return data;
+            }
+            return null;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar data: " + e.getMessage());
+            return null;
         }
     }
 }

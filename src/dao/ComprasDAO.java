@@ -1,8 +1,10 @@
 package dao;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import config.DatabaseConnection;
@@ -12,12 +14,16 @@ import model.Produtos;
 
 public class ComprasDAO extends DatabaseConnection{
 
-    public boolean addCompras(Produtos p, Fornecedores f, Integer quantidade){
+    public boolean addCompras(Produtos p, Integer quantidade){
         try {
-			Statement st = conexao.createStatement();
-			st.executeUpdate("insert into compras values (null, "+ "\""+ f.getNome().toLowerCase()+
-            "\"" + "," + "\""+ p.getNome_produto().toLowerCase()+ "\"" + "," + quantidade + "," +
-            p.getPreco_compra()  + ",default , "+ (p.getPreco_compra().multiply(BigDecimal.valueOf(quantidade))) +")");
+			String query = "insert into compras (id, nome_produto, quantidade, preco_unitario, data_compra, valor_total)" + 
+            "values (null, ?, ?, ?, default, ?)";
+			PreparedStatement ps = conexao.prepareStatement(query);
+            ps.setString(1, p.getNome_produto());
+            ps.setInt(2, quantidade);
+            ps.setBigDecimal(3, p.getPreco_compra());
+            ps.setBigDecimal(4, p.getPreco_compra().multiply(new BigDecimal(quantidade)));
+            ps.executeUpdate();
 			return true;
 		}catch(SQLException e) {System.out.println("erro ao add compra: " + e.getMessage()); return false;}
         
@@ -26,12 +32,13 @@ public class ComprasDAO extends DatabaseConnection{
     public void alterarCompra(Compras compra){
         try{
             Statement st2 = conexao.createStatement();
-            st2.executeUpdate("update compras set nome_fornecedor = " + "\"" + compra.getNomeFornecedor() +
-             "\"" +",nome_produto = " + "\"" + compra.getNomeProduto() + "\"" + ",quantidade = " + compra.getQuantidade() +
-                 " where nome = '" + compra + "'");
-//finalizar isso aqui
+            st2.executeUpdate("update compras set nome_produto = " + "\"" +
+            compra.getNomeProduto() + "\"" + ",quantidade = " + compra.getQuantidade() +
+            ", preco_unitario = " + compra.getPrecoUnitario() + ", data_compra = default, valor_total = " + 
+            compra.getTotalCompra() +" where id = " + compra.getId());
+
         }catch(SQLException e){
-            System.out.println("erro no alterar produto: " + e.getMessage());
+            System.out.println("erro no alterar compra: " + e.getMessage());
         }
     }
 
@@ -58,8 +65,8 @@ public class ComprasDAO extends DatabaseConnection{
             Statement st = conexao.createStatement();
             ResultSet rs = st.executeQuery("select * from compras where id = " + id);
             if(rs.next()){
-                Compras compra = new Compras(rs.getString("nome_fornecedor"),
-                rs.getString("nome_produto"), rs.getBigDecimal("preco_unitario"), rs.getInt("quantidade"));
+                Compras compra = new Compras(rs.getInt("id"), rs.getString("nome_produto"),
+                rs.getBigDecimal("preco_unitario"), rs.getInt("quantidade"));
                 return compra;
             }
             return null;
@@ -80,6 +87,21 @@ public class ComprasDAO extends DatabaseConnection{
             return fornecedores;
         }catch (SQLException e) {
             System.out.println("Erro ao pegar fornecedores: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Timestamp getDataPorId(Integer id){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select data_compra from compras where id = " + id);
+            if(rs.next()){
+                Timestamp data = rs.getTimestamp("data_compra");
+                return data;
+            }
+            return null;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar data: " + e.getMessage());
             return null;
         }
     }
