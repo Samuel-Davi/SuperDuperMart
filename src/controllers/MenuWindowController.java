@@ -1,8 +1,12 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import utils.ConfirmationMessage;
+import utils.QuestionMessage;
 import view.App;
 
 public class MenuWindowController {
@@ -32,8 +36,16 @@ public class MenuWindowController {
     private Button buttonSair;
 
     @FXML
-    void alterar(ActionEvent event) {
+    void alterar(ActionEvent event) throws Exception {
+        ArrayList <String> options = new ArrayList<>();
+        options.add("produtos");
+        options.add("compras");
+        options.add("vendas");
+        String result = QuestionMessage.showQuestionMessage(options);
 
+        if(result == "produtos") App.changeScene("../view/AlterarProdutos.fxml");
+        if(result == "compras") App.changeScene("../view/AlterarCompras.fxml");
+        if(result == "vendas") App.changeScene("../view/AlterarVendas.fxml");
     }
 
     @FXML
@@ -53,7 +65,9 @@ public class MenuWindowController {
 
     @FXML
     void sair(ActionEvent event) {
-
+        boolean result = ConfirmationMessage.showConfirmationMessage("Saída", "Tem certeza que deseja sair?",
+        "Sim", "Não");
+        if(result) System.exit(0);
     }
 
     @FXML

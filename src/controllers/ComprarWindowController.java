@@ -8,6 +8,7 @@ import dao.ProdutosDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.Fornecedores;
 import model.Produtos;
@@ -28,6 +29,9 @@ public class ComprarWindowController {
     private Button buttonConfirmar;
 
     @FXML
+    private ComboBox<String> comboBoxProdutos;
+
+    @FXML
     private TextField contatoFornecedorField;
 
     @FXML
@@ -41,6 +45,35 @@ public class ComprarWindowController {
 
     @FXML
     private TextField quantidadeProduto;
+
+    @FXML
+    void initialize(){
+        comboBoxProdutos.getItems().addAll(pdao.getNomeProdutos());
+        comboBoxProdutos.getItems().add("novo");
+
+        comboBoxProdutos.valueProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue!= null &&!newValue.equals(oldValue)){
+                mudaInformacoes(newValue);
+            }
+        });
+    }
+
+    void mudaInformacoes(String newValue){
+        if(newValue == "novo"){
+            nomeProduto.clear();
+            nomeProduto.setEditable(true);
+            precoProduto.clear();
+            precoProduto.setEditable(true);
+            quantidadeProduto.clear();
+        }else{
+            Produtos p = pdao.getProdutoPorNome(newValue);
+            nomeProduto.setText(p.getNome_produto());
+            nomeProduto.setEditable(false);
+            precoProduto.setText(p.getPreco_compra().toString());
+            precoProduto.setEditable(false);
+        }
+        
+    }
 
     @FXML
     void comprar(ActionEvent event) throws Exception {
@@ -65,7 +98,7 @@ public class ComprarWindowController {
         if(!pdao.ProdutoExiste(p)){
             pdao.addProduto(p);
         }else{
-            pdao.alterarProduto(p.getNome_produto(), precoProdutoDouble, precoDeVenda, p.getEstoque_atual());
+            pdao.atualizaEstoque(p.getNome_produto(), p.getEstoque_atual());
         }
 
         cdao.addCompras(p, f, Integer.parseInt(quantidadeProduto.getText()));

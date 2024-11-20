@@ -96,7 +96,7 @@
                      <children>
                         <ComboBox fx:id="boxProdutos" prefWidth="150.0" />
                         <TextField fx:id="quantidadeVenda" />
-                        <TextField fx:id="valorUnitarioVenda" />
+                        <TextField fx:id="valorUnitarioVenda" editable="false" />
                         <TextField fx:id="valorTotalVenda" editable="false" text="0.00" />
                         <TextField fx:id="valorPagoVenda" />
                         <TextField fx:id="trocoVenda" editable="false" text="0.00" />

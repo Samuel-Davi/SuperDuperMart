@@ -10,6 +10,7 @@ public class ConfirmationMessage {
      String textButtonPositivo, String textButtonNegativo){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
+        alert.setHeaderText(title);
         alert.setContentText(content);
 
         alert.getButtonTypes().clear();

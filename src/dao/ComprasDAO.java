@@ -1,9 +1,12 @@
 package dao;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import config.DatabaseConnection;
+import model.Compras;
 import model.Fornecedores;
 import model.Produtos;
 
@@ -20,22 +23,64 @@ public class ComprasDAO extends DatabaseConnection{
         
     }
 
-    /*public Produtos getProdutoPorNome(String nome){
-        for(Produtos p: listaDeProdutos){
-            if(p.getNome_produto().equals(nome)) return p;
-        }
-        return null;
-    }
-
-    public void alterarProduto(String nome, double precoCompra, double precoVenda, int estoqueAtual){
+    public void alterarCompra(Compras compra){
         try{
-            Statement st = conexao.createStatement();
-            ResultSet rs = st.executeQuery("select estoque_atual from produtos where nome = " + "\"" + nome + "\"");
-            Integer estoqueRes = rs.getInt(1) + estoqueAtual;
-            st.executeUpdate("update produtos set preco_compra = " + precoCompra + ", " +
-                    "preco_venda = " + precoVenda + ", estoque_atual = " + estoqueRes + " where nome_produto = '" + nome + "'");
+            Statement st2 = conexao.createStatement();
+            st2.executeUpdate("update compras set nome_fornecedor = " + "\"" + compra.getNomeFornecedor() +
+             "\"" +",nome_produto = " + "\"" + compra.getNomeProduto() + "\"" + ",quantidade = " + compra.getQuantidade() +
+                 " where nome = '" + compra + "'");
+//finalizar isso aqui
         }catch(SQLException e){
             System.out.println("erro no alterar produto: " + e.getMessage());
         }
-    }*/
+    }
+
+    public ArrayList<String> getIds(){
+        try{
+            Statement st = conexao.createStatement();
+            ArrayList<String> ids = new ArrayList<>();
+            ResultSet rs = st.executeQuery("select id from compras");
+            while(rs.next()){
+                Integer id = rs.getInt(1);
+                ids.add(id.toString());
+            }
+            return ids;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar ids: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Compras getCompraPorIds(String idParam) {
+        Integer id = Integer.parseInt(idParam);
+
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select * from compras where id = " + id);
+            if(rs.next()){
+                Compras compra = new Compras(rs.getString("nome_fornecedor"),
+                rs.getString("nome_produto"), rs.getBigDecimal("preco_unitario"), rs.getInt("quantidade"));
+                return compra;
+            }
+            return null;
+        }catch (SQLException e) {
+            System.out.println("Erro ao pegar ids: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<String> getFornecedores() {
+        ArrayList<String> fornecedores = new ArrayList<>();
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select nome from fornecedores");
+            while(rs.next()){
+                fornecedores.add(rs.getString("nome"));
+            }
+            return fornecedores;
+        }catch (SQLException e) {
+            System.out.println("Erro ao pegar fornecedores: " + e.getMessage());
+            return null;
+        }
+    }
 }

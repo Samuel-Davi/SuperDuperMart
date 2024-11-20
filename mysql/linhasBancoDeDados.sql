@@ -19,21 +19,14 @@ create table produtos(
     estoque_atual int unsigned,
     data_cadastro datetime default current_timestamp
 );
-
 select * from produtos;
-
-delete from produtos where nome = "frango empanado";
-
-insert into produtos values ("arroz", 5.5, 7.15, 5, default);
 
 create table fornecedores(
     nome varchar(45) not null primary key unique,
     contato varchar(45)
 );
 
-delete from fornecedores where nome = "perdigão";
 select * from fornecedores;
-insert into fornecedores values ("brilhante", "brilhante@gmail.com"); 
 
 create table compras(
 	id int not null primary key auto_increment unique,
@@ -49,8 +42,6 @@ create table compras(
 
 select * from compras;
 
-insert into compras values (null, "brilhante", "arroz", 5, 5.5, default, 27.5);
-
 create table vendas(
 	id int not null auto_increment primary key,
     data_venda datetime default current_timestamp,
@@ -59,6 +50,8 @@ create table vendas(
     troco decimal(10,2),
     forma_pagamento varchar(45)
 );
+
+select * from vendas;
 
 create table item_venda(
 	id int not null auto_increment primary key,
@@ -70,6 +63,8 @@ create table item_venda(
     foreign key (id_venda) references vendas(id),
     foreign key (nome_produto) references produtos(nome)
 );
+
+select * from item_venda;
 
 create table relatorios(
 	id int not null auto_increment primary key,
