@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import config.DatabaseConnection;
 import model.Compras;
-import model.Fornecedores;
 import model.Produtos;
 
 public class ComprasDAO extends DatabaseConnection{

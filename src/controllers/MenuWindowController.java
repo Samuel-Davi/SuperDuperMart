@@ -130,8 +130,15 @@ public class MenuWindowController {
     }
 
     @FXML
-    void verLucro(ActionEvent event) {
-
+    void verLucro(ActionEvent event) throws Exception {
+        if(vdao.getIds().size() == 0 && cdao.getIds().size() == 0){
+            ErrorMessage.showErrorMessage(
+            "Erro na verificação de lucro",
+            "Nenhuma venda e compra cadastrada!"
+            );
+            return;
+        }
+        App.changeScene("../view/LucroGeral.fxml");
     }
 
     @FXML

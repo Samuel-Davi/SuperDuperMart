@@ -1,7 +1,6 @@
 package controllers;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import dao.ComprasDAO;
 import dao.FornecedoresDAO;
@@ -12,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.Fornecedores;
 import model.Produtos;
 import utils.ErrorMessage;
 import utils.SuccessMessage;

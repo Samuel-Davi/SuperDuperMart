@@ -8,7 +8,7 @@ public class Produtos {
     private int estoque_atual;
 
     public Produtos(String nome_produto,String descricao ,BigDecimal preco_compra,
-     BigDecimal preco_venda, int estoque_atual) {
+     BigDecimal preco_venda, int estoque_atual){
         this.nome_produto = nome_produto;
         this.descricao = descricao;
         this.preco_compra = (preco_compra);

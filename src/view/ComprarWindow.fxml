@@ -36,7 +36,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -79,10 +78,12 @@
             <Button fx:id="buttonConfirmar" layoutX="533.0" layoutY="301.0" mnemonicParsing="false" onAction="#comprar" text="Confirmar" AnchorPane.rightAnchor="26.0" />
             <Button fx:id="buttonCancelar" layoutX="35.0" layoutY="301.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" AnchorPane.leftAnchor="26.0" />
             <ComboBox fx:id="comboBoxProdutos" layoutX="232.0" layoutY="82.0" prefWidth="150.0" />
-            <Label layoutX="179.0" layoutY="202.0" text="Descreva:" />
-            <TextArea fx:id="descricaoProduto" editable="false" layoutX="272.0" layoutY="179.0" prefHeight="83.0" prefWidth="200.0" />
-            <Label layoutX="193.0" layoutY="149.0" text="Nome:" />
-            <TextField fx:id="nomeProduto" layoutX="291.0" layoutY="145.0" />
+            <Label layoutX="172.0" layoutY="149.0" text="Nome (U.M):" />
+            <TextField fx:id="nomeProduto" layoutX="284.0" layoutY="145.0" />
+            <Text layoutX="167.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedores:" />
+            <ComboBox layoutX="290.0" layoutY="196.0" prefWidth="150.0" />
+            <ComboBox layoutX="498.0" layoutY="145.0" prefWidth="70.0" />
+            <TextField layoutX="459.0" layoutY="145.0" prefWidth="25.0" />
          </children>
     </AnchorPane>
   </children>
