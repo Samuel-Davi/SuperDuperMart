@@ -17,11 +17,6 @@ public class Compras {
         this.quantidade = quantidade;
     }
 
-    public String getDescricao(){
-        Produtos p = new ProdutosDAO().getProdutoPorNome(nomeProduto);
-        return p.getDescricao();
-    }
-
     // Getters and Setters
 
     public Integer getId() {

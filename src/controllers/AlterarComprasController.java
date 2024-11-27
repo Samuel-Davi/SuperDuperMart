@@ -93,7 +93,6 @@ public class AlterarComprasController {
 
         Compras c = cdao.getCompraPorIds(newValue);
         comboBoxProduto.setValue(c.getNomeProduto());
-        descricaoProduto.setText(pdao.getProdutoPorNome(c.getNomeProduto()).getDescricao());
         precoField.setText(String.valueOf(c.getPrecoUnitario()));
         quantidadeField.setText(String.valueOf(c.getQuantidade()));
         // TODO: preencher os campos com os dados da compra com id newValue

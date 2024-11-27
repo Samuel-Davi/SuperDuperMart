@@ -3,13 +3,11 @@ package controllers;
 import java.math.BigDecimal;
 
 import dao.ComprasDAO;
-import dao.FornecedoresDAO;
 import dao.ProdutosDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Produtos;
 import utils.ErrorMessage;
@@ -18,7 +16,6 @@ import view.App;
 
 public class ComprarWindowController {
 
-    FornecedoresDAO fdao = new FornecedoresDAO();
     ProdutosDAO pdao = new ProdutosDAO();
     ComprasDAO cdao = new ComprasDAO();
 
@@ -35,7 +32,16 @@ public class ComprarWindowController {
     private TextField nomeProduto;
 
     @FXML
-    private TextArea descricaoProduto;
+    private TextField qtdUM;
+
+    @FXML
+    private ComboBox<String> UM;
+
+    @FXML
+    private ComboBox<String> comboBoxMarca;
+
+    @FXML
+    private TextField novaMarca;
 
     @FXML
     private TextField precoProduto;
@@ -45,8 +51,22 @@ public class ComprarWindowController {
 
     @FXML
     void initialize(){
-        comboBoxProdutos.getItems().addAll(pdao.getNomeProdutos());
+        comboBoxProdutos.getItems().addAll(pdao.getIdsProdutos());
         comboBoxProdutos.getItems().add("novo");
+        UM.getItems().addAll("l", "kg", "m", "g", "ml");
+
+        comboBoxMarca.getItems().addAll(pdao.getMarcas());
+        comboBoxMarca.getItems().add("nova");
+
+        comboBoxMarca.valueProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue == "nova"){
+                novaMarca.clear();
+                novaMarca.setDisable(false);
+            }else{
+                novaMarca.clear();
+                novaMarca.setDisable(true);
+            }
+        });
 
         comboBoxProdutos.valueProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue!= null &&!newValue.equals(oldValue)){
@@ -59,17 +79,23 @@ public class ComprarWindowController {
         if(newValue == "novo"){
             nomeProduto.clear();
             nomeProduto.setEditable(true);
+            qtdUM.clear();
+            qtdUM.setEditable(true);
+            UM.setDisable(false);
+            comboBoxMarca.setDisable(false);
             precoProduto.clear();
-            descricaoProduto.setEditable(true);
-            descricaoProduto.clear();
             precoProduto.setEditable(true);
             quantidadeProduto.clear();
         }else{
-            Produtos p = pdao.getProdutoPorNome(newValue);
+            Produtos p = pdao.getProdutoPorId(newValue);
             nomeProduto.setText(p.getNome_produto());
             nomeProduto.setEditable(false);
-            descricaoProduto.setText(p.getDescricao());
-            descricaoProduto.setEditable(false);
+            qtdUM.setText(p.getQtdUM());
+            qtdUM.setEditable(false);
+            UM.setValue(p.getUM());
+            UM.setDisable(true);
+            comboBoxMarca.setValue(p.getMarca());
+            comboBoxMarca.setDisable(true);
             precoProduto.setText(p.getPreco_compra().toString());
             precoProduto.setEditable(false);
         }
@@ -78,7 +104,8 @@ public class ComprarWindowController {
     @FXML
     void comprar(ActionEvent event) throws Exception {
 
-        if(descricaoProduto.getText().isEmpty() || nomeProduto.getText().isEmpty() || precoProduto.getText().isEmpty() || quantidadeProduto.getText().isEmpty()){
+        if(qtdUM.getText().isEmpty() || nomeProduto.getText().isEmpty() || precoProduto.getText().isEmpty() || 
+        quantidadeProduto.getText().isEmpty() || UM.getValue().isEmpty() || comboBoxMarca.getValue().isEmpty()){
             System.out.println("Erro na compra");
             ErrorMessage.showErrorMessage(
                 "Erro!",
@@ -90,11 +117,27 @@ public class ComprarWindowController {
         Double precoProdutoDouble = Double.parseDouble(precoProduto.getText());
         Double precoDeVenda = precoProdutoDouble*0.3 + precoProdutoDouble;
 
-        Produtos p = new Produtos(nomeProduto.getText(), descricaoProduto.getText(),new BigDecimal(precoProduto.getText()),
+        Integer id = 0;
+        if(comboBoxProdutos.getValue() !=  "novo"){
+            id = Integer.parseInt(comboBoxProdutos.getValue());
+        }
+        String marca = "";
+        if(comboBoxMarca.getValue() == "nova"){
+            marca = novaMarca.getText();
+        }else{
+            marca = comboBoxMarca.getValue();
+        }
+        String nomeProdutoGeral = nomeProduto.getText() + " " + "(" + qtdUM.getText() + "," + UM.getValue() + ")";
+        Produtos p = new Produtos(id,nomeProdutoGeral, marca,new BigDecimal(precoProduto.getText()),
          new BigDecimal(precoDeVenda), Integer.parseInt(quantidadeProduto.getText()));
-
+        
+        if(!pdao.MarcaExiste(marca)){
+            pdao.addMarca(marca);
+        }
+        
         if(!pdao.ProdutoExiste(p)){
             pdao.addProduto(p);
+            p.setId(pdao.getIdPorNome(p.getNomeTotal()));
         }else{
             pdao.atualizaEstoque(p.getNome_produto(), p.getEstoque_atual());
         }

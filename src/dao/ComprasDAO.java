@@ -15,10 +15,10 @@ public class ComprasDAO extends DatabaseConnection{
 
     public boolean addCompras(Produtos p, Integer quantidade){
         try {
-			String query = "insert into compras (id, nome_produto, quantidade, preco_unitario, data_compra, valor_total)" + 
+			String query = "insert into compras (id, id_produto, quantidade, preco_unitario, data_compra, valor_total)" + 
             "values (null, ?, ?, ?, default, ?)";
 			PreparedStatement ps = conexao.prepareStatement(query);
-            ps.setString(1, p.getNome_produto());
+            ps.setInt(1, p.getId());
             ps.setInt(2, quantidade);
             ps.setBigDecimal(3, p.getPreco_compra());
             ps.setBigDecimal(4, p.getPreco_compra().multiply(new BigDecimal(quantidade)));

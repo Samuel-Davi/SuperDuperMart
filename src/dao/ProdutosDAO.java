@@ -18,11 +18,12 @@ public class ProdutosDAO extends DatabaseConnection{
 
     public boolean addProduto(Produtos p){
         try {
-            String query = "insert into produtos (nome, descricao, preco_compra, preco_venda, estoque_atual, data_cadastro)" + 
-            "values (?, ?, ?, ?, ?, default)";
+            String query = "insert into produtos (id, nome, nome_marca, preco_compra, preco_venda, estoque_atual, data_cadastro)" + 
+            "values (null, ?, ?, ?, ?, ?, default)";
 			PreparedStatement ps = conexao.prepareStatement(query);
-            ps.setString(1, p.getNome_produto());
-            ps.setString(2, p.getDescricao());
+            String campoNomeGeral = p.getNome_produto() + " " + "(" + p.getQtdUM() + "," + p.getUM() + ")";
+            ps.setString(1, campoNomeGeral);
+            ps.setString(2, p.getMarca());
             ps.setBigDecimal(3, p.getPreco_compra());
             ps.setBigDecimal(4, p.getPreco_venda());
             ps.setInt(5, p.getEstoque_atual());
@@ -32,9 +33,49 @@ public class ProdutosDAO extends DatabaseConnection{
         
     }
 
+    public Integer getIdPorNome(String nome){
+        getDados();
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select id from produtos where nome = " + "\"" + nome + "\"");
+            if(rs.next()){
+                int id = (Integer.valueOf(rs.getInt(1)));
+                return id;
+            }
+            return null;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar id: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean MarcaExiste(String marca){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select count(*) from marcas where nome = " + "\"" + marca + "\"");
+            if(rs.next()){
+                int quantidade = (Integer.valueOf(rs.getInt(1)));
+                if(quantidade > 0) return true;
+            }
+            return false;
+        }catch(SQLException e){
+            System.out.println("Erro ao verificar se a marca existe: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void addMarca(String marca){
+        try{
+            Statement st = conexao.createStatement();
+            st.executeUpdate("insert into marcas (nome) values (" + "\"" + marca + "\")");
+        }catch(Exception e){
+            System.out.println("Erro ao add marca: " + e.getMessage());
+        }
+    }
+
     public boolean ProdutoExiste(Produtos p){
         for(Produtos pro: listaDeProdutos){
-            if(pro.getNome_produto().equals(p.getNome_produto())) return true;
+            if(pro.getId() == (p.getId())) return true;
         }
         return false;
     }
@@ -46,12 +87,34 @@ public class ProdutosDAO extends DatabaseConnection{
         return null;
     }
 
-    public void alterarProduto(String nome, String desc, double precoCompra, double precoVenda, int estoqueAtual){
+    public ArrayList<String> getMarcas(){
+        ArrayList<String> marcas = new ArrayList<String>();
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select nome_marca from produtos");
+            while(rs.next()){
+                marcas.add(rs.getString(1));
+            }
+            return marcas;
+        }catch(SQLException e){
+            System.out.println("erro ao pegar marcas: " + e.getMessage());
+            return marcas;
+        }
+    }
+    public Produtos getProdutoPorId(String Id){
+        Integer id = Integer.parseInt(Id);
+        for(Produtos p: listaDeProdutos){
+            if(p.getId() == (id)) return p;
+        }
+        return null;
+    }
+
+    public void alterarProduto(Integer id, String nome, String marca, double precoCompra, double precoVenda, int estoqueAtual){
         try{
             Statement st2 = conexao.createStatement();
-            st2.executeUpdate("update produtos set descricao = " + "\"" + desc + "\"" + ",preco_compra = " + precoCompra + ", " +
-                "preco_venda = " + precoVenda + ", estoque_atual = " + estoqueAtual +
-                " where nome = '" + nome + "'");
+            st2.executeUpdate("update produtos set nome =  nome_marca = " +"\"" + marca +"\"" +
+            ",preco_compra = " + precoCompra + ", " + "preco_venda = " + precoVenda + 
+            ", estoque_atual = " + estoqueAtual + " where id = " + id + ")");
 
         }catch(SQLException e){
             System.out.println("erro no alterar produto: " + e.getMessage());
@@ -80,8 +143,8 @@ public class ProdutosDAO extends DatabaseConnection{
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("select * from produtos");
 			while (rs.next()) {
-                Produtos f = new Produtos(rs.getString(1), rs.getString(2), rs.getBigDecimal(3), rs.getBigDecimal(4),
-                rs.getInt(5));
+                Produtos f = new Produtos(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4), rs.getBigDecimal(5),
+                rs.getInt(6));
                 listaDeProdutos.add(f);
 			}
 		}catch(SQLException e) {System.out.println("erro no pegar dados dos produtos: " + e.getMessage());}
@@ -98,6 +161,21 @@ public class ProdutosDAO extends DatabaseConnection{
             return nomes;
         }catch(SQLException e){
             System.out.println("Erro ao pegar nomes dos produtos: " + e.getMessage());
+        }
+        return null;
+    }
+    public ArrayList<String> getIdsProdutos(){
+        ArrayList<String> nomes = new ArrayList<>();
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select id from produtos");
+            while(rs.next()){
+                Integer id = rs.getInt(1);
+                nomes.add(id.toString());
+            }
+            return nomes;
+        }catch(SQLException e){
+            System.out.println("Erro ao pegar ids dos produtos: " + e.getMessage());
         }
         return null;
     }

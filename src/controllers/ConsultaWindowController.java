@@ -72,7 +72,6 @@ public class ConsultaWindowController {
 
     String impressaoProduto(Produtos p){
         return "Nome Produto: " + p.getNome_produto() + "\n" +
-                "Descrição: " + p.getDescricao() + "\n" +
                 "Preço de Compra: " + p.getPreco_compra() + "\n" +
                 "Preço de Venda: " + p.getPreco_venda() + "\n" +
                 "Estoque Atual: " + p.getEstoque_atual() + "\n" +
@@ -82,7 +81,6 @@ public class ConsultaWindowController {
     String impressaoCompra(Compras c){
         return "Compra: " + c.getId() + "\n" +
                 "Nome Produto: " + c.getNomeProduto() + "\n" +
-                "Descrição do Produto: " + c.getDescricao() + "\n" +
                 "Quantidade: " + c.getQuantidade() + "\n" +
                 "Preço Unitário: " + c.getPrecoUnitario() + "\n" +
                 "Data da Compra: " + cdao.getDataPorId(c.getId());

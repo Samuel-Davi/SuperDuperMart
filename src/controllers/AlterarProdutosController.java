@@ -55,7 +55,6 @@ public class AlterarProdutosController {
     void mudaInformacoes(String newValue){
         Produtos p = pdao.getProdutoPorNome(newValue);
         precoCompra.setText(String.valueOf(p.getPreco_compra()));
-        descProduto.setText(p.getDescricao());
         precoVenda.setText(String.valueOf(p.getPreco_venda()));
         estoqueAtual.setText(String.valueOf(p.getEstoque_atual()));
     }
@@ -89,7 +88,7 @@ public class AlterarProdutosController {
         );
 
         if(result) {
-            pdao.alterarProduto(comboBoxProdutos.getValue(),
+            pdao.alterarProduto(0, comboBoxProdutos.getValue(),
             descProduto.getText(),
             Double.parseDouble(precoCompra.getText()), 
             Double.parseDouble(precoVenda.getText()),
