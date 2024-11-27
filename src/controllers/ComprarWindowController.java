@@ -139,7 +139,7 @@ public class ComprarWindowController {
             pdao.addProduto(p);
             p.setId(pdao.getIdPorNome(p.getNomeTotal()));
         }else{
-            pdao.atualizaEstoque(p.getNome_produto(), p.getEstoque_atual());
+            pdao.atualizaEstoque(p.getNomeTotal(), p.getEstoque_atual());
         }
 
         cdao.addCompras(p,Integer.parseInt(quantidadeProduto.getText()));

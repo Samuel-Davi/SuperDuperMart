@@ -3,6 +3,7 @@ create database superdupermart;
 use superdupermart;
 show tables;
 
+
 create table admin(
 	id int not null auto_increment primary key,
     username varchar(20),
@@ -16,7 +17,7 @@ create table marcas(
 );
 
 create table produtos(
-	id int not null unique primary key,
+	id int not null unique primary key auto_increment,
     nome varchar(45) not null unique,
     nome_marca varchar(45),
     preco_compra decimal(10,2) not null,
@@ -31,13 +32,11 @@ select * from produtos;
 create table compras(
 	id int not null primary key auto_increment unique,
     id_produto int not null,
-    nome_marca varchar(45),
 	quantidade int unsigned,
     preco_unitario decimal(10,2) unsigned,
     data_compra datetime default current_timestamp,
     valor_total decimal(10,2) unsigned,
-    foreign key (id_produto) references produtos(id),
-    foreign key (nome_marca) references marcas(nome)
+    foreign key (id_produto) references produtos(id)
 );
 
 select * from compras;
