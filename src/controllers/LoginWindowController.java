@@ -14,7 +14,7 @@ import view.App;
 public class LoginWindowController {
 
     AdminDAO dao = new AdminDAO();
-    Admin admin = new Admin(null, null);
+    Admin admin = new Admin(null, null, null);
 
     @FXML
     private Button btnCadastro;
@@ -29,29 +29,8 @@ public class LoginWindowController {
     private TextField usernameField;
 
     @FXML
-    void addUser(ActionEvent event) {
-        admin.setSenha((senhaField.getText()));
-        admin.setUsername((usernameField.getText()));
-        if(admin.getSenha().isEmpty() || admin.getUsername().isEmpty()){
-            System.out.println("erro no cadastro");
-            ErrorMessage.showErrorMessage(
-                "Erro!",
-                "Preencha os campos corretamente"
-            );
-            return;
-        }
-        
-        if(dao.addAdmin(admin)){
-            SuccessMessage.showSucessMessage(
-                "Sucesso!",
-                "Usuário cadastrado com sucesso!"
-            );
-        }else ErrorMessage.showErrorMessage(
-            "Erro!",
-            "Usuário já cadastrado!"
-        );
-        usernameField.clear();
-        senhaField.clear();
+    void addUser(ActionEvent event) throws Exception {
+        App.changeScene("../view/CadastroWindow.fxml");
     }
 
     @FXML

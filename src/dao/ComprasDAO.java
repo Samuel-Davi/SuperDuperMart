@@ -31,8 +31,8 @@ public class ComprasDAO extends DatabaseConnection{
     public void alterarCompra(Compras compra){
         try{
             Statement st2 = conexao.createStatement();
-            st2.executeUpdate("update compras set nome_produto = " + "\"" +
-            compra.getNomeProduto() + "\"" + ",quantidade = " + compra.getQuantidade() +
+            st2.executeUpdate("update compras set id_produto = " +
+            compra.getidProduto() + ",quantidade = " + compra.getQuantidade() +
             ", preco_unitario = " + compra.getPrecoUnitario() + ", data_compra = default, valor_total = " + 
             compra.getTotalCompra() +" where id = " + compra.getId());
 
@@ -64,7 +64,7 @@ public class ComprasDAO extends DatabaseConnection{
             Statement st = conexao.createStatement();
             ResultSet rs = st.executeQuery("select * from compras where id = " + id);
             if(rs.next()){
-                Compras compra = new Compras(rs.getInt("id"), rs.getString("nome_produto"),
+                Compras compra = new Compras(rs.getInt("id"), rs.getInt("id_produto"),
                 rs.getBigDecimal("preco_unitario"), rs.getInt("quantidade"));
                 return compra;
             }

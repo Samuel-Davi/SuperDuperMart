@@ -61,7 +61,7 @@ public class LucroDAO extends DatabaseConnection{
 
     public Double getValorFinanceiro(){
         try{
-            String sql = "select (preco_venda, estoque_atual) from produtos";
+            String sql = "select preco_venda, estoque_atual from produtos";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Double soma = 0.0;

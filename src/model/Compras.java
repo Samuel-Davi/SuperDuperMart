@@ -2,17 +2,15 @@ package model;
 
 import java.math.BigDecimal;
 
-import dao.ProdutosDAO;
-
 public class Compras {
 
-    private String nomeProduto;
+    private Integer idProduto;
     private BigDecimal precoUnitario;
     private Integer id, quantidade;
 
-    public Compras(Integer id, String nomeProduto, BigDecimal precoUnitario, Integer quantidade) {
+    public Compras(Integer id, Integer idProduto, BigDecimal precoUnitario, Integer quantidade) {
         this.id = id;
-        this.nomeProduto = nomeProduto;
+        this.idProduto = idProduto;
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
     }
@@ -27,12 +25,12 @@ public class Compras {
         this.id = id;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public Integer getidProduto() {
+        return idProduto;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setidProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
     public BigDecimal getPrecoUnitario() {

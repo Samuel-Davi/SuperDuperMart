@@ -37,16 +37,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AppController">
   <children>
-    <AnchorPane VBox.vgrow="ALWAYS">
+    <AnchorPane stylesheets="@../css/App.css" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="151.0" layoutY="104.0" text="Bem Vindo ao SuperDuperMart">
-               <font>
-                  <Font size="23.0" />
-               </font></Label>
-            <Button fx:id="btnAperta" layoutX="281.0" layoutY="244.0" mnemonicParsing="false" onAction="#apertou" text="Continuar" />
+            <VBox id="vBoxPai" layoutX="145.0" layoutY="90.0">
+               <children>
+                  <VBox id="vBoxCima">
+                     <children>
+                        <Label text="Bem Vindo ao">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <Text id="textoBaixo" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperDuperMart">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <Button id="botaoContinua" fx:id="btnAperta" mnemonicParsing="false" onAction="#apertou" text="Continuar">
+                     <font>
+                        <Font name="System Italic" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
       </children>
     </AnchorPane>
   </children>

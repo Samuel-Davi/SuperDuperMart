@@ -26,7 +26,7 @@ public class AlterarProdutosController {
     private Button buttonConfirmar;
 
     @FXML
-    private TextArea descProduto;
+    private TextField nomeProduto;
 
     @FXML
     private ComboBox<String> comboBoxProdutos;
@@ -40,11 +40,24 @@ public class AlterarProdutosController {
     @FXML
     private TextField precoVenda;
 
+    @FXML
+    private TextField qtdMedida;
+
+    @FXML
+    private ComboBox<String> boxMedida;
+
+    @FXML
+    private ComboBox<String> boxFornecedor;
+
 
     @FXML
     void initialize() throws Exception{
-        ArrayList<String> nomeProdutos = pdao.getNomeProdutos();
+        ArrayList<String> nomeProdutos = pdao.getIdsProdutos();
         comboBoxProdutos.getItems().addAll(nomeProdutos);
+
+        boxMedida.getItems().addAll("L", "mL","Kg", "g", "cm", "m");
+        boxFornecedor.getItems().addAll(pdao.getMarcas());
+
         comboBoxProdutos.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!= null && !newValue.equals(oldValue)){
                 mudaInformacoes(newValue);
@@ -53,7 +66,11 @@ public class AlterarProdutosController {
     }
 
     void mudaInformacoes(String newValue){
-        Produtos p = pdao.getProdutoPorNome(newValue);
+        Produtos p = pdao.getProdutoPorId(newValue);
+        nomeProduto.setText(p.getNome_produto());
+        qtdMedida.setText(p.getQtdUM());
+        boxMedida.setValue(p.getUM());
+        boxFornecedor.setValue(p.getMarca());
         precoCompra.setText(String.valueOf(p.getPreco_compra()));
         precoVenda.setText(String.valueOf(p.getPreco_venda()));
         estoqueAtual.setText(String.valueOf(p.getEstoque_atual()));
@@ -88,8 +105,9 @@ public class AlterarProdutosController {
         );
 
         if(result) {
-            pdao.alterarProduto(0, comboBoxProdutos.getValue(),
-            descProduto.getText(),
+            pdao.alterarProduto(Integer.parseInt(comboBoxProdutos.getValue()),
+            (nomeProduto.getText() + " (" + qtdMedida.getText() + "," + boxMedida.getValue() + ")"),
+            boxFornecedor.getValue(),
             Double.parseDouble(precoCompra.getText()), 
             Double.parseDouble(precoVenda.getText()),
             Integer.parseInt(estoqueAtual.getText()));

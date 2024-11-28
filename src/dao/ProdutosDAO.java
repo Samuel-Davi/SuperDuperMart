@@ -49,18 +49,18 @@ public class ProdutosDAO extends DatabaseConnection{
         }
     }
 
-    public boolean MarcaExiste(String marca){
+    public String getNomePorId(Integer id){
+        getDados();
         try{
             Statement st = conexao.createStatement();
-            ResultSet rs = st.executeQuery("select count(*) from marcas where nome = " + "\"" + marca + "\"");
+            ResultSet rs = st.executeQuery("select nome from produtos where id = " + id);
             if(rs.next()){
-                int quantidade = (Integer.valueOf(rs.getInt(1)));
-                if(quantidade > 0) return true;
+                return rs.getString(1);
             }
-            return false;
+            return null;
         }catch(SQLException e){
-            System.out.println("Erro ao verificar se a marca existe: " + e.getMessage());
-            return false;
+            System.out.println("Erro ao pegar nome por id: " + e.getMessage());
+            return null;
         }
     }
 
@@ -81,8 +81,9 @@ public class ProdutosDAO extends DatabaseConnection{
     }
 
     public Produtos getProdutoPorNome(String nome){
+        getDados();
         for(Produtos p: listaDeProdutos){
-            if(p.getNome_produto().equals(nome)) return p;
+            if(p.getNomeTotal().equals(nome)) return p;
         }
         return null;
     }
@@ -91,7 +92,7 @@ public class ProdutosDAO extends DatabaseConnection{
         ArrayList<String> marcas = new ArrayList<String>();
         try{
             Statement st = conexao.createStatement();
-            ResultSet rs = st.executeQuery("select nome_marca from produtos");
+            ResultSet rs = st.executeQuery("select nome from marcas");
             while(rs.next()){
                 marcas.add(rs.getString(1));
             }
@@ -99,6 +100,21 @@ public class ProdutosDAO extends DatabaseConnection{
         }catch(SQLException e){
             System.out.println("erro ao pegar marcas: " + e.getMessage());
             return marcas;
+        }
+    }
+
+    public boolean MarcaExiste(String marca){
+        try{
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery("select count(*) from marcas where nome = " + "\"" + marca + "\"");
+            if(rs.next()){
+                int quantidade = (Integer.valueOf(rs.getInt(1)));
+                if(quantidade > 0) return true;
+            }
+            return false;
+        }catch(SQLException e){
+            System.out.println("Erro ao verificar se a marca existe: " + e.getMessage());
+            return false;
         }
     }
     public Produtos getProdutoPorId(String Id){
@@ -111,10 +127,15 @@ public class ProdutosDAO extends DatabaseConnection{
 
     public void alterarProduto(Integer id, String nome, String marca, double precoCompra, double precoVenda, int estoqueAtual){
         try{
-            Statement st2 = conexao.createStatement();
-            st2.executeUpdate("update produtos set nome =  nome_marca = " +"\"" + marca +"\"" +
-            ",preco_compra = " + precoCompra + ", " + "preco_venda = " + precoVenda + 
-            ", estoque_atual = " + estoqueAtual + " where id = " + id + ")");
+            String sql = "UPDATE produtos SET nome =?, nome_marca =?, preco_compra =?, preco_venda =?, estoque_atual =? WHERE id =?";  // SQL query to update records in the table
+            PreparedStatement st = conexao.prepareStatement(sql);
+            st.setString(1, nome);
+            st.setString(2, marca);
+            st.setDouble(3, precoCompra);
+            st.setDouble(4, precoVenda);
+            st.setInt(5, estoqueAtual);
+            st.setInt(6, id);
+            st.executeUpdate();
 
         }catch(SQLException e){
             System.out.println("erro no alterar produto: " + e.getMessage());
@@ -195,14 +216,14 @@ public class ProdutosDAO extends DatabaseConnection{
         }
     }
 
-    public void deleteProduto(String nome){
+    public void deleteProduto(Integer id){
         try{
             Statement st1 = conexao.createStatement();
             Statement st2 = conexao.createStatement();
             Statement st3 = conexao.createStatement();
-            st3.executeUpdate("delete from compras where nome_produto = '" + nome + "'");
-            st2.executeUpdate("delete from vendas where nome_produto = '" + nome + "'");
-            st1.executeUpdate("delete from produtos where nome = '" + nome + "'");
+            st3.executeUpdate("delete from compras where id_produto = '" + id + "'");
+            st2.executeUpdate("delete from vendas where id_produto = '" + id + "'");
+            st1.executeUpdate("delete from produtos where id = '" + id + "'");
         }catch(SQLException e){
             System.out.println("Erro ao deletar produto: " + e.getMessage());
         }

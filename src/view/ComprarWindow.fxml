@@ -39,53 +39,73 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ComprarWindowController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/ComprarWindow.css" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="272.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produto:">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Text>
-            <FlowPane alignment="CENTER" layoutX="120.0" layoutY="254.0" orientation="VERTICAL" prefHeight="120.0" prefWidth="400.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+            <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="24.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="10.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOVA COMPRA:">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <FlowPane alignment="CENTER">
                      <children>
-                        <Label text="Preço:">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label text="Quantidade:" />
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="15.0">
+                           <children>
+                              <Label text="Produto:" />
+                              <Label text="Nome (U.M):" />
+                              <Label text="Quantia:" />
+                              <Label text="Marca:" />
+                              <Label text="Nova Marca:" />
+                              <Label text="Preço:">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Quantidade:" />
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxProdutos" prefWidth="150.0" styleClass="comboBox" />
+                              <TextField fx:id="nomeProduto" editable="false" styleClass="textField" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="qtdUM" editable="false" prefWidth="48.0" styleClass="textField" />
+                                    <Label text="U.M:" />
+                                    <ComboBox fx:id="UM" disable="true" prefWidth="70.0" styleClass="comboBox" />
+                                 </children>
+                              </HBox>
+                              <ComboBox fx:id="comboBoxMarca" disable="true" prefWidth="150.0" styleClass="comboBox" />
+                              <TextField fx:id="novaMarca" disable="true" styleClass="textField" />
+                              <TextField fx:id="precoProduto" editable="false" styleClass="textField" />
+                              <TextField fx:id="quantidadeProduto" styleClass="textField" />
+                           </children>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets right="15.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                  </FlowPane>
+                  <HBox alignment="CENTER" spacing="60.0">
                      <children>
-                        <TextField fx:id="precoProduto" editable="false" />
-                        <TextField fx:id="quantidadeProduto" />
+                        <Button id="botaoVoltar" fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelar" styleClass="botoes" text="Voltar" />
+                        <Button id="botaoConfirma" fx:id="buttonConfirmar" mnemonicParsing="false" onAction="#comprar" styleClass="botoes" text="Confirmar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </FlowPane>
-            <Button fx:id="buttonConfirmar" layoutX="533.0" layoutY="301.0" mnemonicParsing="false" onAction="#comprar" text="Confirmar" AnchorPane.rightAnchor="26.0" />
-            <Button fx:id="buttonCancelar" layoutX="35.0" layoutY="301.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" AnchorPane.leftAnchor="26.0" />
-            <ComboBox fx:id="comboBoxProdutos" layoutX="232.0" layoutY="81.0" prefWidth="150.0" />
-            <Label layoutX="172.0" layoutY="149.0" text="Nome (U.M):" />
-            <TextField fx:id="nomeProduto" editable="false" layoutX="284.0" layoutY="145.0" />
-            <Text layoutX="190.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" />
-            <ComboBox fx:id="comboBoxMarca" disable="true" layoutX="290.0" layoutY="196.0" prefWidth="150.0" />
-            <ComboBox fx:id="UM" disable="true" layoutX="498.0" layoutY="145.0" prefWidth="70.0" />
-            <TextField fx:id="qtdUM" editable="false" layoutX="459.0" layoutY="145.0" prefWidth="25.0" />
-            <Label layoutX="172.0" layoutY="245.0" text="Nova Marca:" />
-            <TextField fx:id="novaMarca" disable="true" layoutX="290.0" layoutY="241.0" />
+            </VBox>
          </children>
     </AnchorPane>
   </children>

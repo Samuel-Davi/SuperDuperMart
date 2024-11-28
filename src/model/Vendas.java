@@ -3,12 +3,13 @@ package model;
 import java.math.BigDecimal;
 
 public class Vendas {
+    private Produtos produto;
     private Integer id, quantidade;
     private BigDecimal valorTotal, valorPago, troco, precoUnitario;
-    private String formaPagamento, nomeProduto;
+    private String formaPagamento;
 
     public Vendas(Integer id,  BigDecimal valorPago, String formaPagamento,
-     BigDecimal troco, String nomeProduto, BigDecimal precoUnitario, Integer quantidade) {
+     BigDecimal troco, Produtos produto, BigDecimal precoUnitario, Integer quantidade) {
         this.id = id;
         this.valorTotal = precoUnitario.multiply(new BigDecimal(quantidade));
         this.valorPago = valorPago;
@@ -16,9 +17,22 @@ public class Vendas {
         if(Double.valueOf(valorPago.subtract(valorTotal).toString()) >= 0.0) 
             this.troco = valorPago.subtract(valorTotal);
         else this.troco = new BigDecimal(0.0);
-        this.nomeProduto = nomeProduto;
+        this.produto = produto;
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
+    }
+
+    public void imprimeVenda(){
+        System.out.println("ID: " + id);
+        System.out.println("Nome do Produto: " + produto.getNome_produto());
+        System.out.println("Marca: " + produto.getMarca());
+        System.out.println("Valor Total: " + valorTotal);
+        System.out.println("Valor Pago: " + valorPago);
+        System.out.println("Troco: " + troco);
+        System.out.println("Forma de Pagamento: " + formaPagamento);
+        System.out.println("Preço Unitário: " + precoUnitario);
+        System.out.println("Quantidade: " + quantidade);
+        System.out.println("--------------------------------------------");
     }
 
     // Getters and Setters
@@ -43,8 +57,8 @@ public class Vendas {
         return formaPagamento;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public Produtos getProduto() {
+        return produto;
     }
 
     public BigDecimal getPrecoUnitario() {
@@ -75,8 +89,8 @@ public class Vendas {
         this.formaPagamento = formaPagamento;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setProduto(Produtos produto) {
+        this.produto = produto;
     }
 
     public void setPrecoUnitario(BigDecimal precoUnitario) {

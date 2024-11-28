@@ -58,14 +58,14 @@ public class AlterarVendaController {
 
     @FXML
     void confirmarAlteracao(ActionEvent event) throws Exception {
-        Produtos produto = pdao.getProdutoPorNome(comboBoxProduto.getValue());
+        Produtos produto = pdao.getProdutoPorId(comboBoxId.getValue());
 
         Vendas venda = new Vendas(
             Integer.parseInt(comboBoxId.getValue()), 
             new BigDecimal(valorPago.getText()), 
             formaPagamento.getValue(), 
             new BigDecimal(Integer.parseInt(quantidadeField.getText())*Double.valueOf(produto.getPreco_venda().toString())), 
-            comboBoxProduto.getValue(), 
+            pdao.getProdutoPorId(comboBoxProduto.getValue()), 
             produto.getPreco_venda(), 
             Integer.parseInt(quantidadeField.getText()));
         vdao.alterarVenda(venda);
@@ -84,7 +84,7 @@ public class AlterarVendaController {
         formasdepagamento.add("Crédito");
         comboBoxId.getItems().addAll(vdao.getIds());
         formaPagamento.getItems().addAll(formasdepagamento);
-        comboBoxProduto.getItems().addAll(pdao.getNomeProdutos());
+        comboBoxProduto.getItems().addAll(pdao.getIdsProdutos());
         comboBoxId.valueProperty().addListener((observable, oldValue, newValue) ->{
             if(newValue!= null &&!newValue.equals(oldValue)){
                 mudaInformacoes(newValue);
@@ -97,7 +97,7 @@ public class AlterarVendaController {
 
         Vendas v = vdao.getVendasPorIds(newValue);
         formaPagamento.setValue(v.getFormaPagamento());
-        comboBoxProduto.setValue(v.getNomeProduto());
+        comboBoxProduto.setValue(String.valueOf(v.getProduto().getId()));
         valorPago.setText(String.valueOf(v.getValorPago()));
         quantidadeField.setText(String.valueOf(v.getQuantidade()));
         // TODO: preencher os campos com os dados da compra com id newValue

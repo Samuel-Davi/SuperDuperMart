@@ -5,10 +5,8 @@ AnchorPane{
 
 #vBoxPai{
     -fx-alignment: center;
-    -fx-max-width: 453;
-    -fx-max-height: 317;
-    -fx-pref-height: 317;
-    -fx-pref-width: 453;
+    -fx-pref-width: 350;
+    -fx-pref-height: 291;
     -fx-background-color: #e5f8fd;
     -fx-border-width: 2;          /* Largura da borda */
     -fx-border-radius: 15;        /* Bordas arredondadas na borda */
@@ -21,6 +19,7 @@ AnchorPane{
 Label{
     -fx-font-size: 12px;
     -fx-text-fill: #565663;
+    -fx-padding: 10;
 }
 
 .textField{
@@ -42,25 +41,29 @@ Label{
     -fx-cursor: hand;
 }
 
-.botoes{
-    -fx-max-height: 21;
-    -fx-max-width: 81;
+
+#botaoConfirma{
+    -fx-pref-height: 29;
+    -fx-pref-width: 111;
+    -fx-background-color: #74cd8c;
+    -fx-text-fill: #004412;
     -fx-border-width: 2;          /* Largura da borda */
     -fx-border-radius: 15;        /* Bordas arredondadas na borda */
     -fx-padding: 10;  
     -fx-background-radius: 15;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, -4, 4);
     -fx-cursor: hand;
-    -fx-font-size: 9px;
+    -fx-font-size: 13px;
     -fx-font-style: Bold;
 }
 
-#botaoConfirma{
-    -fx-background-color: #74cd8c;
-    -fx-text-fill: #004412;
+#botaoLink{
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+    -fx-text-fill: #565663;
+    -fx-background-color: #e5f8fd;
 }
 
-#botaoVoltar{
-    -fx-background-color: #ec7d7f;
-    -fx-text-fill: #9d181a;
+#botaoCadastro:hover{
+    -fx-underline: true;
 }

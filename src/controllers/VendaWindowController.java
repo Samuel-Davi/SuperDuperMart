@@ -3,12 +3,14 @@ package controllers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import dao.ProdutosDAO;
 import dao.VendaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import model.Produtos;
 import model.Vendas;
 import utils.ConfirmationMessage;
 import utils.ErrorMessage;
@@ -18,6 +20,7 @@ import view.App;
 public class VendaWindowController {
 
     VendaDAO vdao = new VendaDAO();
+    ProdutosDAO pdao = new ProdutosDAO();
 
     @FXML
     private ComboBox<String> boxProdutos;
@@ -45,6 +48,9 @@ public class VendaWindowController {
 
     @FXML
     private TextField valorUnitarioVenda;
+
+    @FXML
+    private TextField nomeProduto;
 
     @FXML
     void cancelaVenda(ActionEvent event) throws Exception {
@@ -77,11 +83,15 @@ public class VendaWindowController {
             return;
         }
 
-        Vendas venda = new Vendas(0,
+
+        Produtos p = pdao.getProdutoPorId(boxProdutos.getValue());
+        p.imprimeProduto();
+
+        Vendas venda = new Vendas(null,
         new BigDecimal(valorPagoVenda.getText()), 
         formaPagamento.getValue(),
         new BigDecimal(trocoVenda.getText()), 
-        (boxProdutos.getValue()),
+        p,
         new BigDecimal(valorUnitarioVenda.getText()), 
         Integer.parseInt(quantidadeVenda.getText()));
 
@@ -115,18 +125,18 @@ public class VendaWindowController {
 
     @FXML
     void initialize(){
-        vdao.getNomesProdutos(boxProdutos);
+        boxProdutos.getItems().addAll(pdao.getIdsProdutos());
         carregaFormasDePagamento(formaPagamento);
         
         boxProdutos.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null && !newValue.equals(oldValue)){
-                mudaValorUnitario(newValue);
+                mudaValores(newValue);
             }
         });
 
         quantidadeVenda.textProperty().addListener((observable, oldValue, newValue) -> {
             Double valorUnitario = 0.0;
-            Integer estoqueProduto = vdao.getEstoqueProduto(boxProdutos.getValue());
+            Integer estoqueProduto = vdao.getEstoqueProduto(pdao.getProdutoPorId(boxProdutos.getValue()).getNomeTotal());
             if(!newValue.isEmpty()){
                 if(Integer.valueOf(newValue) > estoqueProduto){
                     ErrorMessage.showErrorMessage("Estoque insuficiente!", "Estoque insuficiente para a quantidade escolhida.");
@@ -182,8 +192,11 @@ public class VendaWindowController {
         
     }
 
-    void mudaValorUnitario(String nomeProduto){
-        Double valorUnitario = vdao.getValorUnitarioPorNome(nomeProduto);
+    void mudaValores(String id){
+        Produtos p = pdao.getProdutoPorId(id);
+        nomeProduto.setText(p.getNomeTotal() + " (" +p.getMarca() + ")");
+
+        Double valorUnitario = vdao.getValorUnitarioPorNome(p.getNomeTotal());
         if(valorUnitario!= 0.0) valorUnitarioVenda.setText(valorUnitario.toString());
         else {
             ErrorMessage.showErrorMessage("Erro!", "Valor Unitário do produto não encontrado.");

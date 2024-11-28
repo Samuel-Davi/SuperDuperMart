@@ -46,67 +46,81 @@
   <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/VendaWindow.css" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="252.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Venda">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <HBox id="hboxPai" layoutX="220.0" layoutY="101.0" prefHeight="268.0" prefWidth="340.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="80.0">
+            <VBox id="vBoxPai" layoutX="94.0" layoutY="17.0">
                <children>
-                  <VBox id="vboxLeft" alignment="CENTER" prefHeight="200.0" prefWidth="170.0" spacing="15.0" styleClass="vbox">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Venda">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <HBox id="hboxPai" prefHeight="268.0" prefWidth="340.0">
                      <children>
-                        <Label text="Produto:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Quantidade:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Valor unitario:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Valor Total:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Valor Pago:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Troco:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Forma de Pagamento:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <VBox id="vboxLeft" alignment="CENTER" prefHeight="200.0" prefWidth="170.0" spacing="15.0" styleClass="vbox">
+                           <children>
+                              <Label text="Produto:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Nome Produto:">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Valor unitario:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Valor Total:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Valor Pago:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Troco:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Forma de Pagamento:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox id="vboxRight" alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="10.0" styleClass="vbox">
+                           <children>
+                              <ComboBox fx:id="boxProdutos" prefWidth="150.0" />
+                              <TextField fx:id="nomeProduto" editable="false" />
+                              <TextField fx:id="quantidadeVenda" />
+                              <TextField fx:id="valorUnitarioVenda" editable="false" />
+                              <TextField fx:id="valorTotalVenda" editable="false" text="0.00" />
+                              <TextField fx:id="valorPagoVenda" />
+                              <TextField fx:id="trocoVenda" editable="false" text="0.00" />
+                              <ComboBox fx:id="formaPagamento" prefWidth="150.0" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox id="vboxRight" alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="10.0" styleClass="vbox">
+                  </HBox>
+                  <HBox alignment="CENTER">
                      <children>
-                        <ComboBox fx:id="boxProdutos" prefWidth="150.0" />
-                        <TextField fx:id="quantidadeVenda" />
-                        <TextField fx:id="valorUnitarioVenda" editable="false" />
-                        <TextField fx:id="valorTotalVenda" editable="false" text="0.00" />
-                        <TextField fx:id="valorPagoVenda" />
-                        <TextField fx:id="trocoVenda" editable="false" text="0.00" />
-                        <ComboBox fx:id="formaPagamento" prefWidth="150.0" />
+                        <Button fx:id="buttonConfirma" mnemonicParsing="false" onAction="#confirmaVenda" text="Confirmar" />
+                        <Button fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelaVenda" text="Cancelar" />
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
-            <Button fx:id="buttonConfirma" layoutX="532.0" layoutY="344.0" mnemonicParsing="false" onAction="#confirmaVenda" text="Confirmar" />
-            <Button fx:id="buttonCancelar" layoutX="23.0" layoutY="344.0" mnemonicParsing="false" onAction="#cancelaVenda" text="Cancelar" />
+            </VBox>
          </children>
       </AnchorPane>
   </children>

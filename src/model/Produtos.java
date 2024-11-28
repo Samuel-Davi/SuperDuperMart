@@ -19,6 +19,11 @@ public class Produtos {
         this.estoque_atual = estoque_atual;
     }
 
+    public void imprimeProduto(){
+        System.out.println("ID: " + id + ", Nome do Produto: " + nome_produto + ", Marca: " + marca +
+        ", Preço de Compra: " + preco_compra + ", Preço de Venda: " + preco_venda + ", Estoque Atual: " + estoque_atual);
+    }
+
     // Getters and Setters
 
     public String getMarca() {
@@ -40,7 +45,6 @@ public class Produtos {
         String[] vetor = this.nome_produto.split(" ");
         ArrayList<String> campoNomeProduto = new ArrayList<>(Arrays.asList(vetor));
         ArrayList<String> subCampo = new ArrayList<>(campoNomeProduto.subList(0, campoNomeProduto.size() - 1));
-        System.out.println("subcampo:" + subCampo);
         return String.join(" ", subCampo);
     }
 

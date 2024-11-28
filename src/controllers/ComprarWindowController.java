@@ -53,7 +53,7 @@ public class ComprarWindowController {
     void initialize(){
         comboBoxProdutos.getItems().addAll(pdao.getIdsProdutos());
         comboBoxProdutos.getItems().add("novo");
-        UM.getItems().addAll("l", "kg", "m", "g", "ml");
+        UM.getItems().addAll("L", "mL","Kg", "g", "cm", "m");
 
         comboBoxMarca.getItems().addAll(pdao.getMarcas());
         comboBoxMarca.getItems().add("nova");
@@ -127,6 +127,7 @@ public class ComprarWindowController {
         }else{
             marca = comboBoxMarca.getValue();
         }
+        if(!pdao.MarcaExiste(marca)) pdao.addMarca(marca);
         String nomeProdutoGeral = nomeProduto.getText() + " " + "(" + qtdUM.getText() + "," + UM.getValue() + ")";
         Produtos p = new Produtos(id,nomeProdutoGeral, marca,new BigDecimal(precoProduto.getText()),
          new BigDecimal(precoDeVenda), Integer.parseInt(quantidadeProduto.getText()));

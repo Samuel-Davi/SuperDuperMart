@@ -38,7 +38,8 @@ public class RemocaoProdutosController {
             "Não");
 
         if(rs){
-            new ProdutosDAO().deleteProduto(comboBox.getValue());
+
+            new ProdutosDAO().deleteProduto(new ProdutosDAO().getIdPorNome(comboBox.getValue()));
             App.changeScene("../view/MenuWindow.fxml");
         }
     }

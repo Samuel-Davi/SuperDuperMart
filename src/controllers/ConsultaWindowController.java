@@ -71,16 +71,16 @@ public class ConsultaWindowController {
     }
 
     String impressaoProduto(Produtos p){
-        return "Nome Produto: " + p.getNome_produto() + "\n" +
+        return "Nome Produto: " + p.getNomeTotal() + "\n" +
                 "Preço de Compra: " + p.getPreco_compra() + "\n" +
                 "Preço de Venda: " + p.getPreco_venda() + "\n" +
                 "Estoque Atual: " + p.getEstoque_atual() + "\n" +
-                "Data do Cadastro: " + pdao.getDataPorNome(p.getNome_produto());
+                "Data do Cadastro: " + pdao.getDataPorNome(p.getNomeTotal());
     }
 
     String impressaoCompra(Compras c){
         return "Compra: " + c.getId() + "\n" +
-                "Nome Produto: " + c.getNomeProduto() + "\n" +
+                "Nome Produto: " + pdao.getNomePorId(c.getidProduto()) + "\n" +
                 "Quantidade: " + c.getQuantidade() + "\n" +
                 "Preço Unitário: " + c.getPrecoUnitario() + "\n" +
                 "Data da Compra: " + cdao.getDataPorId(c.getId());
@@ -88,7 +88,7 @@ public class ConsultaWindowController {
 
     String impressaoVenda(Vendas v){
         return "Venda: " + v.getId() + "\n" +
-                "Nome Produto: " + v.getNomeProduto() + "\n" +
+                "Nome Produto: " + v.getProduto().getNome_produto() + "\n" +
                 "Valor Pago: " + v.getValorPago() + "\n" +
                 "Troco: " + v.getTroco() + "\n" +
                 "Forma de Pagamento: " + v.getFormaPagamento() + "\n" +

@@ -36,31 +36,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuWindowController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/menuWindow.css" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/MenuWindow.css" VBox.vgrow="ALWAYS">
          <children>
-            <FlowPane layoutX="57.0" layoutY="26.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="372.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="20.0">
+            <VBox id="vBoxPai" layoutX="94.0" layoutY="42.0">
                <children>
-                  <VBox prefHeight="360.0" prefWidth="200.0" spacing="30.0" styleClass="vboxLeft">
+                  <Text fill="#060276" strokeType="OUTSIDE" strokeWidth="0.0" text="SUPERDUPERMART">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="372.0">
                      <children>
-                        <Button fx:id="buttonNovaCompra" mnemonicParsing="false" onAction="#comprar" prefHeight="50.0" prefWidth="180.0" text="Nova Compra" textAlignment="CENTER" />
-                        <Button fx:id="buttonConsultar" mnemonicParsing="false" onAction="#consultar" prefHeight="50.0" prefWidth="180.0" text="Consultar" />
-                        <Button fx:id="buttonRemocao" mnemonicParsing="false" onAction="#remover" prefHeight="50.0" prefWidth="180.0" text="Remoção" />
-                        <Button fx:id="buttonRelatorios" mnemonicParsing="false" onAction="#verRelatorios" prefHeight="50.0" prefWidth="180.0" text="Relatórios" />
+                        <VBox spacing="20.0" styleClass="vboxLeft">
+                           <children>
+                              <Button fx:id="buttonNovaCompra" mnemonicParsing="false" onAction="#comprar" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Nova Compra" textAlignment="CENTER" />
+                              <Button fx:id="buttonConsultar" mnemonicParsing="false" onAction="#consultar" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Consultar" />
+                              <Button fx:id="buttonRemocao" mnemonicParsing="false" onAction="#remover" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Remoção" />
+                              <Button fx:id="buttonRelatorios" mnemonicParsing="false" onAction="#verRelatorios" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Relatórios" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="20.0" styleClass="vboxRight">
+                           <children>
+                              <Button fx:id="buttonNovaVenda" mnemonicParsing="false" onAction="#vender" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Nova Venda" textAlignment="CENTER" />
+                              <Button fx:id="buttonAlterar" mnemonicParsing="false" onAction="#alterar" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Alterar" />
+                              <Button fx:id="buttonLucro" mnemonicParsing="false" onAction="#verLucro" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Lucro Geral" />
+                              <Button id="botaoSair" fx:id="buttonSair" mnemonicParsing="false" onAction="#sair" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Sair" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox prefHeight="360.0" prefWidth="200.0" spacing="30.0" styleClass="vboxRight">
-                     <children>
-                        <Button fx:id="buttonNovaVenda" mnemonicParsing="false" onAction="#vender" prefHeight="50.0" prefWidth="180.0" text="Nova Venda" textAlignment="CENTER" />
-                        <Button fx:id="buttonAlterar" mnemonicParsing="false" onAction="#alterar" prefHeight="50.0" prefWidth="180.0" text="Alterar" />
-                        <Button fx:id="buttonComprar" mnemonicParsing="false" onAction="#verLucro" prefHeight="50.0" prefWidth="180.0" text="Lucro Geral" />
-                        <Button fx:id="buttonSair" mnemonicParsing="false" onAction="#sair" prefHeight="50.0" prefWidth="180.0" text="Sair" />
-                     </children>
-                  </VBox>
+                  </FlowPane>
                </children>
-            </FlowPane>
+            </VBox>
          </children>
     </AnchorPane>
   </children>

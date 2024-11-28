@@ -61,7 +61,7 @@ public class AlterarComprasController {
     void confirmarAlteracao(ActionEvent event) throws Exception {
         Compras compra = new Compras(
             Integer.parseInt(comboBoxId.getValue()),
-            comboBoxProduto.getValue(),
+            pdao.getIdPorNome(comboBoxProduto.getValue()),
             new BigDecimal(precoField.getText()),
             Integer.valueOf(quantidadeField.getText()));
         cdao.alterarCompra(compra);
@@ -92,7 +92,7 @@ public class AlterarComprasController {
         if(newValue == null) return;
 
         Compras c = cdao.getCompraPorIds(newValue);
-        comboBoxProduto.setValue(c.getNomeProduto());
+        comboBoxProduto.setValue(pdao.getNomePorId(c.getidProduto()));
         precoField.setText(String.valueOf(c.getPrecoUnitario()));
         quantidadeField.setText(String.valueOf(c.getQuantidade()));
         // TODO: preencher os campos com os dados da compra com id newValue

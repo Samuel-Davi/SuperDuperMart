@@ -36,7 +36,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -53,16 +52,14 @@
                </font></Text>
             <ComboBox fx:id="comboBoxId" layoutX="283.0" layoutY="81.0" prefWidth="150.0" />
             <Label layoutX="142.0" layoutY="85.0" text="numero da compra:" />
-            <Label layoutX="176.0" layoutY="128.0" text="produto:" />
+            <Label layoutX="176.0" layoutY="162.0" text="produto:" />
             <Label layoutX="166.0" layoutY="236.0" text="quantidade:" />
             <Label layoutX="158.0" layoutY="283.0" text="preço unitario:" />
-            <ChoiceBox fx:id="comboBoxProduto" layoutX="283.0" layoutY="124.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="comboBoxProduto" layoutX="283.0" layoutY="158.0" prefWidth="150.0" />
             <TextField fx:id="quantidadeField" layoutX="278.0" layoutY="232.0" />
             <TextField fx:id="precoField" layoutX="278.0" layoutY="279.0" />
             <Button fx:id="buttonConfirmar" layoutX="292.0" layoutY="331.0" mnemonicParsing="false" onAction="#confirmarAlteracao" text="Confirmar" />
             <Button fx:id="buttonCancelar" layoutX="39.0" layoutY="305.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
-            <Label layoutX="174.0" layoutY="169.0" text="descricao:" />
-            <TextArea fx:id="descricaoProduto" editable="false" layoutX="269.0" layoutY="165.0" prefHeight="58.0" prefWidth="179.0" />
          </children>
     </AnchorPane>
   </children>

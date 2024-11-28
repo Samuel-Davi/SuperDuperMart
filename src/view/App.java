@@ -24,6 +24,10 @@ public class App extends Application{
             mainStage.setScene(tela);
             mainStage.show();
         }
+
+        public static Stage getMainStage() {
+            return mainStage;
+        }
     
         public static void changeScene(String fxml) throws Exception{
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
