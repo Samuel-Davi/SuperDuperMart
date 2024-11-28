@@ -32,13 +32,10 @@ public class AlterarComprasController {
     private TextArea descricaoProduto;
 
     @FXML
-    private ChoiceBox<String> comboBoxFornecedor;
-
-    @FXML
     private ComboBox<String> comboBoxId;
 
     @FXML
-    private ChoiceBox<String> comboBoxProduto;
+    private ComboBox<String> comboBoxProduto;
 
     @FXML
     private TextField precoField;

@@ -34,19 +34,29 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RemocaoProdutosController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/RemocaProdutos.css" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="253.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remoçao de produtos" />
-            <ComboBox fx:id="comboBox" layoutX="246.0" layoutY="180.0" prefWidth="150.0" />
-            <Button fx:id="buttonConfirma" layoutX="280.0" layoutY="275.0" mnemonicParsing="false" onAction="#confirma" text="Confirmar" />
-            <Button fx:id="buttonCancela" layoutX="56.0" layoutY="275.0" mnemonicParsing="false" onAction="#cancela" text="Cancelar" />
-            <Text layoutX="289.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione:" />
+            <VBox id="vBoxPai" layoutX="94.0" layoutY="42.0">
+               <children>
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Remoçao de produtos" />
+                  <Label text="Selecione:" />
+                  <ComboBox fx:id="comboBox" prefWidth="150.0" styleClass="comboBox" />
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <Button id="botaoVoltar" fx:id="buttonCancela" mnemonicParsing="false" onAction="#cancela" styleClass="botoes" text="Cancelar" />
+                        <Button id="botaoConfirma" fx:id="buttonConfirma" mnemonicParsing="false" onAction="#confirma" styleClass="botoes" text="Confirmar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
     </AnchorPane>
   </children>

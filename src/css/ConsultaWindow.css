@@ -70,3 +70,7 @@ Label{
     -fx-font-size: 24;
     -fx-font-style: Bold;
 }
+
+#textArea{
+    -fx-background-color: #a9ddb7;
+}

@@ -48,9 +48,9 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/ComprarWindow.css" VBox.vgrow="ALWAYS">
          <children>
-            <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="24.0">
+            <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="16.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOVA COMPRA:">
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="NOVA COMPRA:">
                      <font>
                         <Font size="17.0" />
                      </font>

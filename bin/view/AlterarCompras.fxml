@@ -33,33 +33,54 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlterarComprasController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/AlterarCompras.css" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="255.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Compra">
-               <font>
-                  <Font size="18.0" />
-               </font></Text>
-            <ComboBox fx:id="comboBoxId" layoutX="283.0" layoutY="81.0" prefWidth="150.0" />
-            <Label layoutX="142.0" layoutY="85.0" text="numero da compra:" />
-            <Label layoutX="176.0" layoutY="162.0" text="produto:" />
-            <Label layoutX="166.0" layoutY="236.0" text="quantidade:" />
-            <Label layoutX="158.0" layoutY="283.0" text="preço unitario:" />
-            <ChoiceBox fx:id="comboBoxProduto" layoutX="283.0" layoutY="158.0" prefWidth="150.0" />
-            <TextField fx:id="quantidadeField" layoutX="278.0" layoutY="232.0" />
-            <TextField fx:id="precoField" layoutX="278.0" layoutY="279.0" />
-            <Button fx:id="buttonConfirmar" layoutX="292.0" layoutY="331.0" mnemonicParsing="false" onAction="#confirmarAlteracao" text="Confirmar" />
-            <Button fx:id="buttonCancelar" layoutX="39.0" layoutY="305.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+            <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="42.0">
+               <children>
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Compra">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT" spacing="30.0">
+                           <children>
+                              <Label text="numero da compra:" />
+                              <Label text="produto:" />
+                              <Label text="quantidade:" />
+                              <Label text="preço unitario:" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <ComboBox fx:id="comboBoxId" prefWidth="150.0" styleClass="comboBox" />
+                              <ComboBox fx:id="comboBoxProduto" prefWidth="150.0" styleClass="comboBox" />
+                              <TextField fx:id="quantidadeField" styleClass="textField" />
+                              <TextField fx:id="precoField" styleClass="textField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <Button id="botaoVoltar" fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelar" styleClass="botoes" text="Cancelar" />
+                        <Button id="botaoConfirma" fx:id="buttonConfirmar" mnemonicParsing="false" onAction="#confirmarAlteracao" styleClass="botoes" text="Confirmar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
     </AnchorPane>
   </children>

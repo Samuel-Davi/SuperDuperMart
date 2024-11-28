@@ -46,9 +46,9 @@
   <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/VendaWindow.css" VBox.vgrow="ALWAYS">
          <children>
-            <VBox id="vBoxPai" layoutX="94.0" layoutY="17.0">
+            <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="19.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Venda">
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Venda">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -99,24 +99,30 @@
                               </Label>
                            </children>
                         </VBox>
-                        <VBox id="vboxRight" alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="10.0" styleClass="vbox">
+                        <VBox id="vboxRight" alignment="CENTER" prefHeight="200.0" prefWidth="220.0" spacing="5.0" styleClass="vbox">
                            <children>
-                              <ComboBox fx:id="boxProdutos" prefWidth="150.0" />
-                              <TextField fx:id="nomeProduto" editable="false" />
-                              <TextField fx:id="quantidadeVenda" />
-                              <TextField fx:id="valorUnitarioVenda" editable="false" />
-                              <TextField fx:id="valorTotalVenda" editable="false" text="0.00" />
-                              <TextField fx:id="valorPagoVenda" />
-                              <TextField fx:id="trocoVenda" editable="false" text="0.00" />
-                              <ComboBox fx:id="formaPagamento" prefWidth="150.0" />
+                              <ComboBox fx:id="boxProdutos" prefWidth="150.0" styleClass="comboBox" />
+                              <TextField fx:id="nomeProduto" editable="false" styleClass="textField" />
+                              <TextField fx:id="quantidadeVenda" styleClass="textField" />
+                              <TextField fx:id="valorUnitarioVenda" editable="false" styleClass="textField" />
+                              <TextField fx:id="valorTotalVenda" editable="false" styleClass="textField" text="0.00" />
+                              <TextField fx:id="valorPagoVenda" styleClass="textField" />
+                              <TextField fx:id="trocoVenda" editable="false" styleClass="textField" text="0.00" />
+                              <ComboBox fx:id="formaPagamento" prefWidth="150.0" styleClass="comboBox" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" spacing="40.0">
                      <children>
-                        <Button fx:id="buttonConfirma" mnemonicParsing="false" onAction="#confirmaVenda" text="Confirmar" />
-                        <Button fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelaVenda" text="Cancelar" />
+                        <Button id="botaoVoltar" fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelaVenda" text="Cancelar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button id="botaoConfirma" fx:id="buttonConfirma" mnemonicParsing="false" onAction="#confirmaVenda" text="Confirmar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                </children>

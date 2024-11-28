@@ -44,26 +44,22 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AlterarProdutosController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/AlterarProduto.css" VBox.vgrow="ALWAYS">
          <children>
-            <Text layoutX="278.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Produto">
-               <font>
-                  <Font size="19.0" />
-               </font></Text>
-            <VBox layoutX="158.0" layoutY="68.0" prefHeight="240.0" prefWidth="400.0" spacing="15.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+            <VBox id="vBoxPai" alignment="CENTER" layoutX="79.0" layoutY="12.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="30.0" spacing="20.0">
-                     <children>
-                        <Label text="Produto:" />
-                        <ComboBox fx:id="comboBoxProdutos" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <VBox alignment="CENTER" prefHeight="210.0">
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Alterar Produtos">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <VBox prefHeight="240.0" prefWidth="400.0" spacing="15.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="210.0" spacing="30.0">
                            <children>
-                              <VBox alignment="CENTER" spacing="15.0">
+                              <VBox alignment="CENTER" spacing="20.0">
                                  <children>
+                                    <Label text="Produto:" />
                                     <Label text="Nome:" />
                                     <Label text="Medida:" />
                                     <Label text="Marca:" />
@@ -74,27 +70,40 @@
                               </VBox>
                               <VBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="nomeProduto" />
+                                    <ComboBox fx:id="comboBoxProdutos" prefWidth="150.0" styleClass="comboBox" />
+                                    <TextField fx:id="nomeProduto" styleClass="textField" />
                                     <HBox alignment="CENTER" spacing="10.0">
                                        <children>
-                                          <TextField fx:id="qtdMedida" prefWidth="50.0" />
-                                          <ComboBox fx:id="boxMedida" prefHeight="26.0" prefWidth="62.0" />
+                                          <TextField fx:id="qtdMedida" prefWidth="50.0" styleClass="textField" />
+                                          <ComboBox fx:id="boxMedida" prefHeight="26.0" prefWidth="62.0" styleClass="comboBox" />
                                        </children>
                                     </HBox>
-                                    <ComboBox fx:id="boxFornecedor" prefWidth="150.0" />
-                                    <TextField fx:id="precoCompra" />
-                                    <TextField fx:id="precoVenda" />
-                                    <TextField fx:id="estoqueAtual" />
+                                    <ComboBox fx:id="boxFornecedor" prefWidth="150.0" styleClass="comboBox" />
+                                    <TextField fx:id="precoCompra" styleClass="textField" />
+                                    <TextField fx:id="precoVenda" styleClass="textField" />
+                                    <TextField fx:id="estoqueAtual" styleClass="textField" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <Button id="botaoVoltar" fx:id="buttonCancelar" mnemonicParsing="false" onAction="#cancelarAlteracao" styleClass="botoes" text="Cancelar">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button id="botaoConfirma" fx:id="buttonConfirmar" mnemonicParsing="false" onAction="#confirmaAlteracao" styleClass="botoes" text="Confirmar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <Button fx:id="buttonConfirmar" layoutX="307.0" layoutY="349.0" mnemonicParsing="false" onAction="#confirmaAlteracao" text="Confirmar" />
-            <Button fx:id="buttonCancelar" layoutX="28.0" layoutY="349.0" mnemonicParsing="false" onAction="#cancelarAlteracao" text="Cancelar" />
          </children>
     </AnchorPane>
   </children>

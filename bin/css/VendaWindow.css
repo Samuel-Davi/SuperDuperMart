@@ -64,3 +64,9 @@ Label{
     -fx-background-color: #ec7d7f;
     -fx-text-fill: #9d181a;
 }
+
+#titulo{
+    -fx-fill: #060276;
+    -fx-font-size: 24;
+    -fx-font-style: Bold;
+}

@@ -34,7 +34,7 @@ public class AlterarVendaController {
     private ComboBox<String> comboBoxId;
 
     @FXML
-    private ChoiceBox<String> comboBoxProduto;
+    private ComboBox<String> comboBoxProduto;
 
     @FXML
     private ComboBox<String> formaPagamento;

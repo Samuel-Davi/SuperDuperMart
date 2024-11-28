@@ -41,56 +41,63 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LucroGeralController">
+<AnchorPane prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/LucroGeral.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LucroGeralController">
    <children>
-      <Text layoutX="277.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lucro Geral" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="276.21600341796875" AnchorPane.topAnchor="19.895999908447266">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="85.0">
+      <VBox id="vBoxPai" layoutX="94.0" layoutY="41.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="230.0" prefWidth="300.0" spacing="25.0">
+            <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Lucro Geral">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
                <children>
-                  <Label text="Valor de compras:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Valor de Vendas:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Lucro (R$):">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Quantidade de produtos:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label text="Valor financeiro em produtos (R$):" textAlignment="CENTER">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="230.0" prefWidth="170.0" spacing="30.0">
+                     <children>
+                        <Label text="Valor de compras:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Valor de Vendas:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Lucro (R$):">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Quantidade de produtos:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Valor financeiro em produtos:" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="valorCompras" editable="false" maxWidth="150.0" prefWidth="100.0" styleClass="textField" />
+                        <TextField fx:id="valorVendas" editable="false" maxWidth="150.0" prefWidth="100.0" styleClass="textField" />
+                        <TextField fx:id="lucro" editable="false" maxWidth="150.0" prefWidth="100.0" styleClass="textField" />
+                        <TextField fx:id="quantidadeProdutos" editable="false" maxWidth="150.0" prefWidth="100.0" styleClass="textField" />
+                        <TextField fx:id="valorFinanceiro" editable="false" maxWidth="150.0" prefWidth="100.0" styleClass="textField" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="20.0">
-               <children>
-                  <TextField fx:id="valorCompras" editable="false" maxWidth="150.0" prefWidth="100.0" />
-                  <TextField fx:id="valorVendas" editable="false" maxWidth="150.0" prefWidth="100.0" />
-                  <TextField fx:id="lucro" editable="false" maxWidth="150.0" prefWidth="100.0" />
-                  <TextField fx:id="quantidadeProdutos" editable="false" maxWidth="150.0" prefWidth="100.0" />
-                  <TextField fx:id="valorFinanceiro" editable="false" maxWidth="150.0" prefWidth="100.0" />
-               </children>
-            </VBox>
+            </HBox>
+            <Button fx:id="buttonVoltar" mnemonicParsing="false" onAction="#voltar" styleClass="botoes" text="Voltar">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
          </children>
-      </HBox>
-      <Button fx:id="buttonVoltar" layoutX="291.0" layoutY="344.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+      </VBox>
    </children>
 </AnchorPane>
