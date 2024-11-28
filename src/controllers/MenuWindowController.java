@@ -185,7 +185,7 @@ public class MenuWindowController {
 
     @FXML
     void verRelatorios(ActionEvent event) {
-
+        ErrorMessage.showErrorMessage("Erro", "Funcionalidade não disponível no momento");
     }
 
 }

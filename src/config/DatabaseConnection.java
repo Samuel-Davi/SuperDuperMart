@@ -1,6 +1,9 @@
 package config;
 import java.sql.*;
 
+/**
+ * Classe da conexão com o banco de dados
+ */
 public class DatabaseConnection {
 	private static String url = "jdbc:mysql://localhost:3306/superdupermart";
 	private static String user = "root";
@@ -8,9 +11,13 @@ public class DatabaseConnection {
 	protected static Connection conexao = null;
 	
 	
+	/**
+	 * Contrutor da classe
+	 */
 	public DatabaseConnection() {
 		if(conexao == null) conecta();
 	}
+	
 	
 	private static boolean conecta() {
 		try {

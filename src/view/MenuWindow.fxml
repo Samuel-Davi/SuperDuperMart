@@ -57,7 +57,7 @@
                               <Button fx:id="buttonNovaCompra" mnemonicParsing="false" onAction="#comprar" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Nova Compra" textAlignment="CENTER" />
                               <Button fx:id="buttonConsultar" mnemonicParsing="false" onAction="#consultar" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Consultar" />
                               <Button fx:id="buttonRemocao" mnemonicParsing="false" onAction="#remover" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Remoção" />
-                              <Button fx:id="buttonRelatorios" mnemonicParsing="false" onAction="#verRelatorios" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Relatórios" />
+                              <Button fx:id="buttonRelatorios" mnemonicParsing="false" onAction="#verRelatorios" prefHeight="50.0" prefWidth="180.0" styleClass="buttonOption" text="Etiquetas" />
                            </children>
                         </VBox>
                         <VBox spacing="20.0" styleClass="vboxRight">

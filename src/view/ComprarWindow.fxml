@@ -50,7 +50,7 @@
          <children>
             <VBox id="vBoxPai" alignment="CENTER" layoutX="94.0" layoutY="16.0">
                <children>
-                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="NOVA COMPRA:">
+                  <Text id="titulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Compra">
                      <font>
                         <Font size="17.0" />
                      </font>

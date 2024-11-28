@@ -50,6 +50,8 @@ public class CadastroController {
             if(adao.addUsuario(a)){
                 SuccessMessage.showSucessMessage(
                     "Sucesso", "Usuario inserido com sucesso!");
+            }else{
+                ErrorMessage.showErrorMessage("Erro", "Usuario com esse nome ja existe!");
             }
             App.changeScene("../view/LoginWindow.fxml");
         }
